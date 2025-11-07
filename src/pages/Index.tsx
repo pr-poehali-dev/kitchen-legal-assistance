@@ -94,13 +94,13 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            <div className="relative animate-scale-in">
+            <div className="relative animate-scale-in mb-12">
               <img 
                 src="https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/076636e1-3a00-49bb-b82c-5b6e0d2d8210.jpg" 
                 alt="Идеальная кухня"
                 className="rounded-2xl shadow-2xl"
               />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl">
+              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl z-10">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
                     <Icon name="CheckCircle" className="text-green-600" size={24} />
