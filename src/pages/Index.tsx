@@ -4,14 +4,35 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCallbackDialogOpen, setIsCallbackDialogOpen] = useState(false);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
+  };
+
+  const handleWhatsAppClick = () => {
+    const phoneNumber = '79236095502';
+    const message = encodeURIComponent('Здравствуйте! Хочу получить консультацию по защите прав потребителей.');
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  };
+
+  const handleCallbackSubmit = () => {
+    const phoneNumber = '79236095502';
+    const message = encodeURIComponent(`Новая заявка на обратный звонок:\n\nИмя: ${name}\nТелефон: ${phone}`);
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    setIsCallbackDialogOpen(false);
+    setName('');
+    setPhone('');
   };
 
   return (
@@ -515,11 +536,55 @@ const Index = () => {
               </Card>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-white/20">
-              <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-yellow-400 text-lg px-12 py-6 shadow-xl">
+            <div className="mt-12 pt-8 border-t border-white/20 flex flex-col sm:flex-row gap-4 justify-center">
+              <Button onClick={handleWhatsAppClick} size="lg" className="bg-green-600 hover:bg-green-700 text-white text-lg px-12 py-6 shadow-xl">
                 <Icon name="MessageCircle" className="mr-2" size={24} />
-                Заказать обратный звонок
+                Написать в WhatsApp
               </Button>
+              
+              <Dialog open={isCallbackDialogOpen} onOpenChange={setIsCallbackDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-yellow-400 text-lg px-12 py-6 shadow-xl">
+                    <Icon name="Phone" className="mr-2" size={24} />
+                    Заказать обратный звонок
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Заказать обратный звонок</DialogTitle>
+                    <DialogDescription>
+                      Оставьте свои контакты, и мы свяжемся с вами в WhatsApp
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 py-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">Ваше имя</Label>
+                      <Input
+                        id="name"
+                        placeholder="Иван"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Номер телефона</Label>
+                      <Input
+                        id="phone"
+                        placeholder="+7 (999) 123-45-67"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <Button 
+                    onClick={handleCallbackSubmit}
+                    disabled={!name || !phone}
+                    className="w-full bg-primary hover:bg-primary/90"
+                  >
+                    Отправить заявку
+                  </Button>
+                </DialogContent>
+              </Dialog>
             </div>
 
             <div className="mt-12 pt-8">
