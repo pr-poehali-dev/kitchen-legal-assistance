@@ -491,17 +491,17 @@ const Index = () => {
               Расскажем, как вернуть деньги за вашу кухню и взыскать неустойку. Первая консультация бесплатно!
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8 mt-12 bg-slate-500">
+            <div className="grid md:grid-cols-2 gap-8 mt-12">
               <Card className="bg-white/10 backdrop-blur-sm border-white/20">
                 <CardContent className="pt-6 space-y-4">
                   <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mx-auto">
                     <Icon name="Phone" size={28} />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-100">Позвоните нам</h3>
-                  <a href="tel:89236095502" className="text-3xl font-bold hover:text-secondary transition-colors text-slate-100">
+                  <h3 className="text-2xl font-bold text-white">Позвоните нам</h3>
+                  <a href="tel:89236095502" className="text-3xl font-bold hover:text-secondary transition-colors text-white">
                     8 (923) 609-55-02
                   </a>
-                  <p className="text-white/80">Пн-Пт: 9:00 - 19:00, Сб: 10:00 - 16:00</p>
+                  <p className="text-white/90">Пн-Пт: 9:00 - 19:00, Сб: 10:00 - 16:00</p>
                 </CardContent>
               </Card>
 
@@ -510,10 +510,10 @@ const Index = () => {
                   <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mx-auto">
                     <Icon name="MapPin" size={28} />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-100">Приезжайте к нам</h3>
-                  <p className="text-xl font-bold text-slate-100">г. Кемерово</p>
-                  <p className="text-lg font-semibold text-slate-100">ул. Ноградская, 3, офис 38</p>
-                  <p className="text-white/80">Работаем по предварительной записи</p>
+                  <h3 className="text-2xl font-bold text-white">Приезжайте к нам</h3>
+                  <p className="text-xl font-bold text-white">г. Кемерово</p>
+                  <p className="text-lg font-semibold text-white">ул. Ноградская, 3, офис 38</p>
+                  <p className="text-white/90">Работаем по предварительной записи</p>
                 </CardContent>
               </Card>
             </div>
