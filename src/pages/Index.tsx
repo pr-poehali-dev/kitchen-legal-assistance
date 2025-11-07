@@ -511,8 +511,8 @@ const Index = () => {
                     <Icon name="MapPin" size={28} />
                   </div>
                   <h3 className="text-2xl font-bold">Приезжайте к нам</h3>
-                  <p className="text-xl">г. Кемерово</p>
-                  <p className="text-lg text-white/90">ул. Ноградская, 3, офис 38</p>
+                  <p className="text-xl font-bold">г. Кемерово</p>
+                  <p className="text-lg font-semibold">ул. Ноградская, 3, офис 38</p>
                   <p className="text-white/80">Работаем по предварительной записи</p>
                 </CardContent>
               </Card>
