@@ -89,7 +89,7 @@ const Index = () => {
                 <span className="text-primary">Вернем деньги</span> и нервы!
               </h1>
               <p className="text-xl text-muted-foreground">
-                Юридическая помощь по правам покупателей кухонь и конных гарнитуров. Неустойка до 3% в день, возврат 100% средств.
+                Юридическая помощь по правам покупателей кухонных гарнитуров. Неустойка до 3% в день, возврат 100% средств.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button onClick={() => scrollToSection('contacts')} size="lg" className="bg-gradient-to-r from-primary to-blue-700 text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all">
@@ -142,7 +142,7 @@ const Index = () => {
               Знакомые ситуации?
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Мы специализируемся на решении проблем с заказными кухнями и конной амуницией
+              Мы специализируемся на решении проблем с заказными кухонными гарнитурами
             </p>
           </div>
 
@@ -273,7 +273,7 @@ const Index = () => {
                 Эксперты по защите прав потребителей
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Специализируемся исключительно на спорах с изготовителями кухонь на заказ и конной амуниции. 
+                Специализируемся исключительно на спорах с изготовителями кухонных гарнитуров на заказ. 
                 Это наша узкая ниша — мы знаем все тонкости, типовые уловки продавцов и судебную практику.
               </p>
               <div className="space-y-4">
