@@ -100,15 +100,12 @@ const Index = () => {
                 alt="Идеальная кухня"
                 className="rounded-2xl shadow-2xl"
               />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl z-10">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                    <Icon name="CheckCircle" className="text-green-600" size={24} />
+              <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-xl z-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                    <Icon name="CheckCircle" className="text-green-600" size={20} />
                   </div>
-                  <div>
-                    <div className="font-bold">Гарантия результата</div>
-                    <div className="text-sm text-muted-foreground">или вернём гонорар</div>
-                  </div>
+                  <div className="font-bold text-sm">Гарантия результата</div>
                 </div>
               </div>
             </div>
