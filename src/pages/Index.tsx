@@ -63,7 +63,7 @@ const Index = () => {
               <Badge className="bg-secondary text-secondary-foreground font-semibold px-4 py-1">
                 Специализация: защита прав потребителей
               </Badge>
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                 Проблемы с кухней на заказ?{' '}
                 <span className="text-primary">Вернем деньги</span> и нервы!
               </h1>
