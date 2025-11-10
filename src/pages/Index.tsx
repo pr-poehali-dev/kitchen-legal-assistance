@@ -506,7 +506,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Icon name="Scale" className="text-primary" size={32} />
-              <span className="text-2xl font-bold text-primary">Закон Кухни</span>
+              <span className="text-2xl font-bold text-primary">ЮК "Закон Кухни"</span>
             </div>
             
             <div className="hidden md:flex items-center gap-8">
@@ -1040,7 +1040,7 @@ const Index = () => {
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Icon name="Scale" size={24} />
-            <span className="text-xl font-bold">Закон Кухни</span>
+            <span className="text-xl font-bold">ЮК "Закон Кухни"</span>
           </div>
           <p className="text-background/70">© 2024 Все права защищены</p>
         </div>
