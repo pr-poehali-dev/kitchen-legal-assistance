@@ -726,7 +726,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <img 
-                src="https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/8987fad5-c0d0-485f-8997-30037bde1edd.jpg" 
+                src="https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/945000dd-4eff-4437-bab0-2cc79a44e629.jpg" 
                 alt="Наша команда"
                 className="rounded-2xl shadow-xl"
               />
@@ -813,7 +813,7 @@ const Index = () => {
             <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200 max-w-3xl mx-auto">
               <CardContent className="pt-6">
                 <img 
-                  src="https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/10eeb745-3665-44e7-ad6d-bfe34168125f.jpg" 
+                  src="https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/2cabeac2-505d-4607-8910-f085ef52f4b8.jpg" 
                   alt="Довольный клиент"
                   className="rounded-xl mb-6 w-full"
                 />
