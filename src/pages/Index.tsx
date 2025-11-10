@@ -856,7 +856,7 @@ const Index = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Досудебная работа</h3>
                   <div className="text-4xl font-bold text-primary mb-4">15-25%</div>
-                  <p className="text-muted-foreground">от взысканной суммы</p>
+                  <p className="text-muted-foreground">от оплаченной производителем неустойки</p>
                 </div>
                 <div className="space-y-3 pt-4 border-t">
                   {[
@@ -890,8 +890,8 @@ const Index = () => {
                     <Icon name="Scale" className="text-primary" size={32} />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Судебное разбирательство</h3>
-                  <div className="text-4xl font-bold text-primary mb-4">20-30%</div>
-                  <p className="text-muted-foreground">от взысканной суммы</p>
+                  <div className="text-4xl font-bold text-primary mb-4">30-50%</div>
+                  <p className="text-muted-foreground">от взысканной неустойки и штрафа</p>
                 </div>
                 <div className="space-y-3 pt-4 border-t">
                   {[
