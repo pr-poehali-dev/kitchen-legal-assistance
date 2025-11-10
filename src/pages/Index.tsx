@@ -14,6 +14,9 @@ const Index = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [selectedArticle, setSelectedArticle] = useState<number | null>(null);
+  const [kitchenPrice, setKitchenPrice] = useState('');
+  const [delayDays, setDelayDays] = useState('');
+  const [penalty, setPenalty] = useState(0);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -34,6 +37,37 @@ const Index = () => {
     setIsCallbackDialogOpen(false);
     setName('');
     setPhone('');
+  };
+
+  const calculatePenalty = (price: string, days: string) => {
+    const priceNum = parseFloat(price.replace(/\s/g, ''));
+    const daysNum = parseInt(days);
+    
+    if (isNaN(priceNum) || isNaN(daysNum) || priceNum <= 0 || daysNum <= 0) {
+      setPenalty(0);
+      return;
+    }
+    
+    const dailyPenalty = priceNum * 0.03;
+    let totalPenalty = dailyPenalty * daysNum;
+    
+    if (totalPenalty > priceNum) {
+      totalPenalty = priceNum;
+    }
+    
+    setPenalty(Math.round(totalPenalty));
+  };
+
+  const handlePriceChange = (value: string) => {
+    const formatted = value.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    setKitchenPrice(formatted);
+    calculatePenalty(formatted, delayDays);
+  };
+
+  const handleDaysChange = (value: string) => {
+    const days = value.replace(/\D/g, '');
+    setDelayDays(days);
+    calculatePenalty(kitchenPrice, days);
   };
 
   const articles = [
@@ -511,6 +545,7 @@ const Index = () => {
             
             <div className="hidden md:flex items-center gap-8">
               <button onClick={() => scrollToSection('services')} className="text-foreground hover:text-primary transition-colors">Услуги</button>
+              <button onClick={() => scrollToSection('pricing')} className="text-foreground hover:text-primary transition-colors">Цены</button>
               <button onClick={() => scrollToSection('about')} className="text-foreground hover:text-primary transition-colors">О нас</button>
               <button onClick={() => scrollToSection('cases')} className="text-foreground hover:text-primary transition-colors">Кейсы</button>
               <button onClick={() => scrollToSection('blog')} className="text-foreground hover:text-primary transition-colors">Блог</button>
@@ -528,6 +563,7 @@ const Index = () => {
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 space-y-3 animate-fade-in-up">
               <button onClick={() => scrollToSection('services')} className="block w-full text-left py-2 hover:text-primary">Услуги</button>
+              <button onClick={() => scrollToSection('pricing')} className="block w-full text-left py-2 hover:text-primary">Цены</button>
               <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 hover:text-primary">О нас</button>
               <button onClick={() => scrollToSection('cases')} className="block w-full text-left py-2 hover:text-primary">Кейсы</button>
               <button onClick={() => scrollToSection('blog')} className="block w-full text-left py-2 hover:text-primary">Блог</button>
@@ -717,6 +753,193 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/5">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <Badge className="mb-4">Калькулятор неустойки</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Рассчитайте свою компенсацию
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Узнайте, сколько вы можете взыскать за просрочку изготовления кухни
+            </p>
+          </div>
+
+          <Card className="max-w-3xl mx-auto shadow-2xl border-2 border-primary/20">
+            <CardContent className="p-8 md:p-12">
+              <div className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <Label htmlFor="kitchenPrice" className="text-lg font-semibold">
+                      Стоимость кухни (₽)
+                    </Label>
+                    <Input
+                      id="kitchenPrice"
+                      type="text"
+                      placeholder="500 000"
+                      value={kitchenPrice}
+                      onChange={(e) => handlePriceChange(e.target.value)}
+                      className="text-2xl h-14 text-center font-bold"
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <Label htmlFor="delayDays" className="text-lg font-semibold">
+                      Дней просрочки
+                    </Label>
+                    <Input
+                      id="delayDays"
+                      type="text"
+                      placeholder="60"
+                      value={delayDays}
+                      onChange={(e) => handleDaysChange(e.target.value)}
+                      className="text-2xl h-14 text-center font-bold"
+                    />
+                  </div>
+                </div>
+
+                {penalty > 0 && (
+                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl p-8 text-center animate-scale-in">
+                    <div className="text-sm text-muted-foreground mb-2 uppercase tracking-wider">
+                      Вы можете взыскать
+                    </div>
+                    <div className="text-5xl md:text-6xl font-bold text-green-600 mb-4">
+                      {penalty.toLocaleString('ru-RU')} ₽
+                    </div>
+                    <div className="text-sm text-muted-foreground mb-6">
+                      Только неустойка. Дополнительно: моральный вред, штраф 50%, судебные расходы
+                    </div>
+                    <Button onClick={handleWhatsAppClick} size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+                      <Icon name="MessageCircle" className="mr-2" size={20} />
+                      Получить консультацию
+                    </Button>
+                  </div>
+                )}
+
+                <div className="bg-blue-50 border-l-4 border-primary p-6 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <Icon name="Info" className="text-primary mt-1 flex-shrink-0" size={24} />
+                    <div className="text-sm text-muted-foreground">
+                      <strong className="text-foreground">Обратите внимание:</strong> Неустойка составляет 3% от стоимости за каждый день просрочки, 
+                      но не может превышать стоимость самой кухни. Расчёт приблизительный. 
+                      Точную сумму определим после анализа вашего договора.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <section id="pricing" className="py-20 px-4 bg-muted/50">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <Badge className="mb-4">Стоимость услуг</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Прозрачные условия работы
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Вы платите только за результат — никаких скрытых платежей
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <Card className="border-2 hover:shadow-xl transition-all duration-300 animate-fade-in">
+              <CardContent className="pt-8 space-y-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Icon name="FileText" className="text-secondary" size={32} />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">Досудебная работа</h3>
+                  <div className="text-4xl font-bold text-primary mb-4">15-25%</div>
+                  <p className="text-muted-foreground">от взысканной суммы</p>
+                </div>
+                <div className="space-y-3 pt-4 border-t">
+                  {[
+                    'Анализ договора и документов',
+                    'Составление претензии',
+                    'Переговоры с производителем',
+                    'Получение компенсации без суда'
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <Icon name="CheckCircle" className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-green-700 font-semibold">
+                    <Icon name="Clock" size={20} />
+                    <span>Срок: 10-30 дней</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-2 border-primary hover:shadow-xl transition-all duration-300 animate-fade-in relative overflow-hidden" style={{ animationDelay: '0.1s' }}>
+              <div className="absolute top-4 right-4">
+                <Badge className="bg-secondary text-secondary-foreground">Популярно</Badge>
+              </div>
+              <CardContent className="pt-8 space-y-6">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <Icon name="Scale" className="text-primary" size={32} />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">Судебное разбирательство</h3>
+                  <div className="text-4xl font-bold text-primary mb-4">20-30%</div>
+                  <p className="text-muted-foreground">от взысканной суммы</p>
+                </div>
+                <div className="space-y-3 pt-4 border-t">
+                  {[
+                    'Всё из досудебной работы',
+                    'Подготовка искового заявления',
+                    'Представительство в суде',
+                    'Взыскание неустойки + штраф 50%',
+                    'Исполнительное производство'
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <Icon name="CheckCircle" className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-green-700 font-semibold">
+                    <Icon name="Clock" size={20} />
+                    <span>Срок: 2-6 месяцев</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12 max-w-4xl mx-auto">
+            <Card className="bg-gradient-to-br from-primary to-blue-700 text-white border-0">
+              <CardContent className="p-8 md:p-12">
+                <div className="flex flex-col md:flex-row items-center gap-8">
+                  <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <Icon name="ShieldCheck" size={40} />
+                  </div>
+                  <div className="text-center md:text-left flex-1">
+                    <h3 className="text-3xl font-bold mb-3">Оплата только после результата</h3>
+                    <p className="text-xl text-white/90 leading-relaxed">
+                      Вы ничего не платите до момента получения денег. Мы берём процент только с реально взысканной суммы. 
+                      Нет результата — нет оплаты. Все судебные расходы взыскиваем с ответчика.
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <Button onClick={() => scrollToSection('contacts')} size="lg" className="bg-white text-primary hover:bg-white/90">
+                      <Icon name="Phone" className="mr-2" size={20} />
+                      Обсудить условия
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
