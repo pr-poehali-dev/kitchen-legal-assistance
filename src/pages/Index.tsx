@@ -506,7 +506,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Icon name="Scale" className="text-primary" size={32} />
-              <span className="text-2xl font-bold text-primary">ЮК "Закон Кухни"</span>
+              <span className="text-xl md:text-2xl font-bold text-primary">Юридическая компания "Закон Кухни"</span>
             </div>
             
             <div className="hidden md:flex items-center gap-8">
