@@ -682,12 +682,14 @@ const Index = () => {
           })}
         </script>
       </Helmet>
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
-        <div className="container mx-auto px-4 py-4">
+      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-md border-b-2 border-primary/20">
+        <div className="container mx-auto px-4 py-5">
           <div className="flex items-center justify-between">
             <button onClick={scrollToTop} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <Icon name="Scale" className="text-primary" size={32} />
-              <span className="text-2xl font-bold text-primary">ЮК "Закон Кухни"</span>
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-blue-700 rounded-lg flex items-center justify-center shadow-md">
+                <Icon name="Scale" className="text-white" size={24} />
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">ЮК "Закон Кухни"</span>
             </button>
             
             <div className="hidden md:flex items-center gap-8">
