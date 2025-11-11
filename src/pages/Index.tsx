@@ -1737,32 +1737,32 @@ const Index = () => {
       {showStickyButton && !isStickyButtonDismissed && (
         <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary to-blue-700 text-white shadow-2xl z-40 animate-fade-in">
           <div className="container mx-auto">
-            <div className="flex items-center justify-between gap-2 py-3 px-4 md:py-4">
-              <div className="flex items-center gap-2 flex-1 min-w-0">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Icon name="Phone" className="text-white" size={20} />
+            <div className="relative">
+              <button
+                onClick={() => setIsStickyButtonDismissed(true)}
+                className="absolute -top-10 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary/90 hover:bg-primary rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm transition-colors"
+                aria-label="Закрыть"
+              >
+                <Icon name="X" className="text-white" size={18} />
+              </button>
+              <div className="flex flex-col gap-3 py-4 px-4 md:py-4">
+                <div className="flex items-center gap-3 justify-center">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Icon name="Phone" className="text-white" size={20} />
+                  </div>
+                  <div className="text-center">
+                    <div className="font-bold text-base md:text-lg">Бесплатная консультация</div>
+                    <div className="text-white/90 text-xs md:text-sm">Рассчитаем неустойку за 15 минут</div>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="font-bold text-sm md:text-base truncate">Бесплатная консультация</div>
-                  <div className="text-white/90 text-xs md:text-sm hidden sm:block">Рассчитаем неустойку за 15 минут</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
                 <Button 
                   onClick={() => setIsCallbackDialogOpen(true)}
-                  size="sm"
-                  className="bg-secondary text-secondary-foreground hover:bg-yellow-400 font-bold shadow-xl text-xs md:text-sm px-3 md:px-4 whitespace-nowrap"
+                  size="lg"
+                  className="bg-secondary text-secondary-foreground hover:bg-yellow-400 font-bold shadow-xl w-full"
                 >
-                  <Icon name="Sparkles" className="mr-1 md:mr-2" size={16} />
-                  Заказать
+                  <Icon name="Sparkles" className="mr-2" size={18} />
+                  Получить консультацию
                 </Button>
-                <button
-                  onClick={() => setIsStickyButtonDismissed(true)}
-                  className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors flex-shrink-0"
-                  aria-label="Закрыть"
-                >
-                  <Icon name="X" className="text-white" size={18} />
-                </button>
               </div>
             </div>
           </div>
