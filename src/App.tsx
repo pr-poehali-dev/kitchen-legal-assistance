@@ -11,6 +11,7 @@ import DogovorPage from "./pages/articles/DogovorPage";
 import NeustoikaPage from "./pages/articles/NeustoikaPage";
 import BrakPage from "./pages/articles/BrakPage";
 import SudPage from "./pages/articles/SudPage";
+import BotSetupPage from "./pages/BotSetupPage";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/bot-setup" element={<BotSetupPage />} />
             <Route path="/blog/dogovor" element={<DogovorPage />} />
             <Route path="/blog/neustoika" element={<NeustoikaPage />} />
             <Route path="/blog/brak" element={<BrakPage />} />
