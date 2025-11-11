@@ -2,11 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 import Icon from '@/components/ui/icon';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+  showCallbackButton?: boolean;
 }
 
 const ChatWidget = () => {
@@ -19,6 +22,10 @@ const ChatWidget = () => {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showCallbackDialog, setShowCallbackDialog] = useState(false);
+  const [callbackName, setCallbackName] = useState('');
+  const [callbackPhone, setCallbackPhone] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -55,9 +62,12 @@ const ChatWidget = () => {
       const data = await response.json();
 
       if (data.success && data.reply) {
+        const hasPhoneNumber = data.reply.includes('8 (905) 994-00-69') || data.reply.includes('89059940069');
+        
         const assistantMessage: Message = {
           role: 'assistant',
-          content: data.reply
+          content: data.reply,
+          showCallbackButton: hasPhoneNumber
         };
         setMessages(prev => [...prev, assistantMessage]);
       } else {
@@ -94,6 +104,44 @@ const ChatWidget = () => {
 
   const handleQuickQuestion = (question: string) => {
     setInput(question);
+  };
+
+  const handleCallbackSubmit = async () => {
+    if (!callbackName.trim() || !callbackPhone.trim()) return;
+    
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://functions.poehali.dev/ab2c3782-b0e3-4574-a807-8d7a2200df0b', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: callbackName,
+          phone: callbackPhone,
+          message: 'Заявка из чата'
+        }),
+      });
+
+      if (response.ok) {
+        setShowCallbackDialog(false);
+        setCallbackName('');
+        setCallbackPhone('');
+        
+        const successMessage: Message = {
+          role: 'assistant',
+          content: '✅ Спасибо! Ваша заявка принята. Мы перезвоним вам в ближайшее время.'
+        };
+        setMessages(prev => [...prev, successMessage]);
+      } else {
+        alert('Произошла ошибка. Попробуйте позвонить нам напрямую.');
+      }
+    } catch (error) {
+      alert('Произошла ошибка. Попробуйте позвонить нам напрямую.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -138,19 +186,33 @@ const ChatWidget = () => {
 
           <CardContent className="flex-1 overflow-y-auto p-4 space-y-4 bg-muted/30">
             {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
+              <div key={index} className="space-y-2">
                 <div
-                  className={`max-w-[80%] rounded-2xl px-4 py-2 ${
-                    message.role === 'user'
-                      ? 'bg-primary text-white'
-                      : 'bg-white border border-primary/20'
-                  }`}
+                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                      message.role === 'user'
+                        ? 'bg-primary text-white'
+                        : 'bg-white border border-primary/20'
+                    }`}
+                  >
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                  </div>
                 </div>
+                
+                {message.showCallbackButton && (
+                  <div className="flex justify-start">
+                    <Button
+                      onClick={() => setShowCallbackDialog(true)}
+                      size="sm"
+                      className="bg-gradient-to-r from-primary to-blue-700 hover:from-primary/90 hover:to-blue-700/90 text-white shadow-md"
+                    >
+                      <Icon name="Phone" size={16} className="mr-2" />
+                      Заказать обратный звонок
+                    </Button>
+                  </div>
+                )}
               </div>
             ))}
 
@@ -209,6 +271,46 @@ const ChatWidget = () => {
           </div>
         </Card>
       )}
+
+      <Dialog open={showCallbackDialog} onOpenChange={setShowCallbackDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Заказать обратный звонок</DialogTitle>
+            <DialogDescription>
+              Оставьте свои контакты, и мы перезвоним вам в ближайшее время
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="callback-name">Ваше имя</Label>
+              <Input
+                id="callback-name"
+                value={callbackName}
+                onChange={(e) => setCallbackName(e.target.value)}
+                placeholder="Иван Иванов"
+                disabled={isSubmitting}
+              />
+            </div>
+            <div>
+              <Label htmlFor="callback-phone">Телефон</Label>
+              <Input
+                id="callback-phone"
+                value={callbackPhone}
+                onChange={(e) => setCallbackPhone(e.target.value)}
+                placeholder="+7 (999) 123-45-67"
+                disabled={isSubmitting}
+              />
+            </div>
+            <Button
+              onClick={handleCallbackSubmit}
+              disabled={!callbackName.trim() || !callbackPhone.trim() || isSubmitting}
+              className="w-full bg-gradient-to-r from-primary to-blue-700"
+            >
+              {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
