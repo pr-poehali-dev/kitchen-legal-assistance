@@ -786,18 +786,23 @@ const Index = () => {
               
               <div className="space-y-5">
                 {[
-                  { value: "15 млн ₽", label: "Взыскано для клиентов за 2024 год", delay: "0s" },
-                  { value: "95%", label: "Выигранных дел в суде", delay: "0.1s" },
-                  { value: "70%", label: "Дел решаются без суда", delay: "0.2s" },
-                  { value: "2-6 мес", label: "Средний срок получения денег", delay: "0.3s" }
+                  { icon: "Wallet", value: "15 млн ₽", label: "Взыскано для клиентов за 2024 год", delay: "0s" },
+                  { icon: "Award", value: "95%", label: "Выигранных дел в суде", delay: "0.1s" },
+                  { icon: "CheckCircle2", value: "70%", label: "Дел решаются без суда", delay: "0.2s" },
+                  { icon: "Clock", value: "2-6 мес", label: "Средний срок получения денег", delay: "0.3s" }
                 ].map((stat, index) => (
                   <div 
                     key={index} 
                     className="bg-white/60 rounded-xl p-4 animate-scale-in hover:bg-white/80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                     style={{ animationDelay: stat.delay }}
                   >
-                    <div className="text-3xl font-bold text-green-700 mb-1">{stat.value}</div>
-                    <div className="text-sm text-green-900">{stat.label}</div>
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Icon name={stat.icon} className="text-white" size={20} />
+                      </div>
+                      <div className="text-3xl font-bold text-green-700">{stat.value}</div>
+                    </div>
+                    <div className="text-sm text-green-900 ml-13">{stat.label}</div>
                   </div>
                 ))}
               </div>
