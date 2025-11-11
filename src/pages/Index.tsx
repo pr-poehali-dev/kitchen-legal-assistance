@@ -581,9 +581,26 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
-              <Badge className="bg-secondary text-secondary-foreground font-semibold px-4 py-1">
-                Специализация: защита прав потребителей
-              </Badge>
+              <Card className="bg-gradient-to-br from-primary/10 via-blue-50 to-secondary/10 border-2 border-primary/30 shadow-lg">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Icon name="Scale" className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm font-semibold text-primary mb-1 uppercase tracking-wide">
+                        Юридическая компания "Закон Кухни"
+                      </div>
+                      <div className="text-lg font-bold text-foreground leading-snug">
+                        Специализируемся на защите прав покупателей кухонных гарнитуров
+                      </div>
+                      <div className="text-sm text-muted-foreground mt-2">
+                        Взыскиваем неустойки, возвращаем деньги, представляем интересы в суде
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
                 Проблемы с кухней на заказ?{' '}
                 <span className="text-primary">Вернем деньги</span> и нервы!
