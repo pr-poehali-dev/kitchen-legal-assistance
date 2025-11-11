@@ -148,6 +148,14 @@ const ChatWidget = () => {
     <>
       {!isOpen && (
         <div className="fixed bottom-24 left-6 z-50 animate-fade-in">
+          {/* Постоянная надпись */}
+          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap">
+            <div className="bg-white text-gray-800 px-3 py-1.5 rounded-full shadow-lg border border-primary/30 text-xs font-semibold flex items-center gap-1.5 animate-bounce">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+              Онлайн чат
+            </div>
+          </div>
+          
           <button
             onClick={() => setIsOpen(true)}
             className="relative w-16 h-16 bg-gradient-to-br from-primary to-blue-700 hover:from-primary/90 hover:to-blue-700/90 text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 group"
@@ -160,14 +168,6 @@ const ChatWidget = () => {
             <div className="absolute inset-0 rounded-full bg-primary/30 animate-ping"></div>
             <div className="absolute inset-0 rounded-full bg-primary/20 animate-pulse"></div>
           </button>
-          
-          {/* Подсказка */}
-          <div className="absolute bottom-full left-0 mb-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-            <div className="bg-white text-gray-800 px-4 py-2 rounded-lg shadow-xl border border-primary/20 text-sm font-medium">
-              💬 Задайте вопрос юристу
-              <div className="absolute top-full left-8 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white"></div>
-            </div>
-          </div>
         </div>
       )}
 
