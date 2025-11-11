@@ -1380,73 +1380,113 @@ const Index = () => {
               Расскажем, как вернуть деньги за вашу кухню и взыскать неустойку. Первая консультация бесплатно!
             </p>
 
-            <div className="max-w-md mx-auto mt-12">
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                <CardContent className="pt-6 space-y-4">
-                  <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mx-auto">
-                    <Icon name="Phone" size={28} />
+            <div className="grid md:grid-cols-3 gap-6 mt-12">
+              <Card className="bg-white/15 backdrop-blur-sm border-white/30 hover:bg-white/20 transition-all hover:scale-105">
+                <CardContent className="pt-6 space-y-3 text-center">
+                  <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center mx-auto shadow-lg">
+                    <Icon name="Phone" className="text-primary" size={32} />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">Позвоните нам</h3>
-                  <a href="tel:89059940069" className="text-3xl font-bold hover:text-secondary transition-colors text-white">
+                  <h3 className="text-xl font-bold text-white">Позвоните нам</h3>
+                  <a href="tel:89059940069" className="block text-2xl font-bold hover:text-secondary transition-colors text-white">
                     8 (905) 994-00-69
                   </a>
-                  <p className="text-white/90">Пн-Пт: 9:00 - 19:00, Сб: 10:00 - 16:00</p>
+                  <p className="text-white/80 text-sm">Пн-Пт: 9:00 - 19:00<br/>Сб: 10:00 - 16:00</p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/15 backdrop-blur-sm border-white/30 hover:bg-white/20 transition-all hover:scale-105">
+                <CardContent className="pt-6 space-y-3 text-center">
+                  <div className="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center mx-auto shadow-lg">
+                    <Icon name="MessageCircle" className="text-white" size={32} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">WhatsApp</h3>
+                  <p className="text-white/80">Быстрый ответ в мессенджере</p>
+                  <Button onClick={handleWhatsAppClick} className="bg-green-600 hover:bg-green-700 text-white w-full">
+                    Написать
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-white/15 backdrop-blur-sm border-white/30 hover:bg-white/20 transition-all hover:scale-105">
+                <CardContent className="pt-6 space-y-3 text-center">
+                  <div className="w-16 h-16 bg-secondary rounded-xl flex items-center justify-center mx-auto shadow-lg">
+                    <Icon name="PhoneCall" className="text-white" size={32} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">Обратный звонок</h3>
+                  <p className="text-white/80">Мы перезвоним вам в течение 15 минут</p>
+                  <Dialog open={isCallbackDialogOpen} onOpenChange={setIsCallbackDialogOpen}>
+                    <DialogTrigger asChild>
+                      <Button className="bg-secondary text-secondary-foreground hover:bg-yellow-400 w-full">
+                        Заказать
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Заказать обратный звонок</DialogTitle>
+                        <DialogDescription>
+                          Оставьте свои контакты, и мы свяжемся с вами в WhatsApp
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4 py-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="name">Ваше имя</Label>
+                          <Input
+                            id="name"
+                            placeholder="Иван"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="phone">Номер телефона</Label>
+                          <Input
+                            id="phone"
+                            placeholder="+7 (999) 123-45-67"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                      <Button 
+                        onClick={handleCallbackSubmit}
+                        disabled={!name || !phone}
+                        className="w-full bg-primary hover:bg-primary/90"
+                      >
+                        Отправить заявку
+                      </Button>
+                    </DialogContent>
+                  </Dialog>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="mt-12 pt-8 border-t border-white/20 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={handleWhatsAppClick} size="lg" className="bg-green-600 hover:bg-green-700 text-white text-lg px-12 py-6 shadow-xl">
-                <Icon name="MessageCircle" className="mr-2" size={24} />
-                Написать в WhatsApp
-              </Button>
-              
-              <Dialog open={isCallbackDialogOpen} onOpenChange={setIsCallbackDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-yellow-400 text-lg px-12 py-6 shadow-xl">
-                    <Icon name="Phone" className="mr-2" size={24} />
-                    Заказать обратный звонок
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle>Заказать обратный звонок</DialogTitle>
-                    <DialogDescription>
-                      Оставьте свои контакты, и мы свяжемся с вами в WhatsApp
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="space-y-4 py-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Ваше имя</Label>
-                      <Input
-                        id="name"
-                        placeholder="Иван"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Номер телефона</Label>
-                      <Input
-                        id="phone"
-                        placeholder="+7 (999) 123-45-67"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                      />
-                    </div>
+            <div className="mt-16 pt-8 border-t border-white/20">
+              <div className="grid md:grid-cols-3 gap-6 text-center">
+                <div className="space-y-2">
+                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto">
+                    <Icon name="Clock" className="text-white" size={24} />
                   </div>
-                  <Button 
-                    onClick={handleCallbackSubmit}
-                    disabled={!name || !phone}
-                    className="w-full bg-primary hover:bg-primary/90"
-                  >
-                    Отправить заявку
-                  </Button>
-                </DialogContent>
-              </Dialog>
+                  <div className="text-white/90 text-sm">Быстрый ответ</div>
+                  <div className="text-white font-semibold">В течение 15 минут</div>
+                </div>
+                <div className="space-y-2">
+                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto">
+                    <Icon name="Shield" className="text-white" size={24} />
+                  </div>
+                  <div className="text-white/90 text-sm">Конфиденциальность</div>
+                  <div className="text-white font-semibold">100% гарантия</div>
+                </div>
+                <div className="space-y-2">
+                  <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto">
+                    <Icon name="Gift" className="text-white" size={24} />
+                  </div>
+                  <div className="text-white/90 text-sm">Первая консультация</div>
+                  <div className="text-white font-semibold">Бесплатно</div>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-12 pt-8">
+            <div className="mt-8">
               <div className="text-sm text-white/70">
                 Юридическая компания "Закон Кухни"
               </div>
