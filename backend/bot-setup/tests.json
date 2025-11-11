@@ -1,0 +1,23 @@
+{
+  "tests": [
+    {
+      "name": "Test OPTIONS request",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Test missing bot_token",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "check_status"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "bot_token is required"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
