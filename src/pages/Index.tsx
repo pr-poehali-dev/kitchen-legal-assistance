@@ -714,9 +714,9 @@ const Index = () => {
               <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center shadow-md border border-white/30">
                 <Icon name="Scale" className="text-white" size={24} />
               </div>
-              <div className="text-left">
-                <div className="text-2xl font-bold text-white drop-shadow-md">ЮК "Вернём кухню"</div>
-                <div className="text-xs text-white/80 font-medium">Ваш юрист по мебельным спорам</div>
+              <div>
+                <div className="text-2xl font-bold text-white drop-shadow-md whitespace-nowrap">ЮК "Вернём кухню"</div>
+                <div className="text-xs text-white/80 font-medium whitespace-nowrap">Ваш юрист по мебельным спорам</div>
               </div>
             </button>
             
@@ -777,7 +777,10 @@ const Index = () => {
                           Юридическая компания
                         </div>
                         <div className="text-2xl font-extrabold text-white leading-none tracking-tight drop-shadow-md">
-                          ЗАКОН КУХНИ
+                          ВЕРНЁМ КУХНЮ
+                        </div>
+                        <div className="text-white/70 text-[9px] font-medium tracking-wide mt-1 drop-shadow-sm">
+                          Ваш юрист по мебельным спорам
                         </div>
                       </div>
                     </div>
