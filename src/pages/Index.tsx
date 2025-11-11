@@ -544,6 +544,34 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <link rel="canonical" href={canonicalUrl} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Блог ЮК Закон Кухни",
+            "description": "Полезные статьи о защите прав потребителей при заказе кухонь",
+            "url": `${canonicalUrl}#blog`,
+            "publisher": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/favicon-1762792088542.svg"
+              }
+            },
+            "blogPost": articles.map((article) => ({
+              "@type": "BlogPosting",
+              "headline": article.title,
+              "description": article.preview,
+              "url": `${canonicalUrl}${article.url}`,
+              "datePublished": "2025-11-11",
+              "author": {
+                "@type": "Organization",
+                "name": "ЮК Закон Кухни"
+              }
+            }))
+          })}
+        </script>
       </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">

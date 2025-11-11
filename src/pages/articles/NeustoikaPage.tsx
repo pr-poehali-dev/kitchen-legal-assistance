@@ -106,6 +106,34 @@ const NeustoikaPage = () => {
         <meta property="og:description" content="Формула расчета неустойки 3% в день за просрочку изготовления кухни. Примеры расчетов и инструкция." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "Как рассчитать неустойку за просрочку",
+            "description": "Формула расчета неустойки 3% в день за просрочку изготовления кухни. Примеры расчетов, ограничения неустойки, что еще можно взыскать с производителя.",
+            "author": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/favicon-1762792088542.svg"
+              }
+            },
+            "datePublished": "2025-11-11",
+            "dateModified": "2025-11-11",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": canonicalUrl
+            },
+            "articleSection": "Права потребителя",
+            "keywords": "неустойка за просрочку, расчет неустойки, просрочка кухни, 3% в день, защита прав потребителей"
+          })}
+        </script>
       </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">

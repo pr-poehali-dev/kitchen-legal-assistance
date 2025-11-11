@@ -146,6 +146,54 @@ const BrakPage = () => {
         <meta property="og:description" content="Пошаговая инструкция: фотофиксация, акт, претензия. Как взыскать компенсацию за дефекты." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "Обнаружили брак? Действуйте правильно",
+            "description": "Пошаговая инструкция при обнаружении брака кухни: фотофиксация, акт о недостатках, претензия. Как взыскать компенсацию за дефекты.",
+            "author": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/favicon-1762792088542.svg"
+              }
+            },
+            "datePublished": "2025-11-11",
+            "dateModified": "2025-11-11",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "name": "Не подписывайте акт приёмки",
+                "text": "Если дефекты обнаружены при установке, откажитесь подписывать акт и попросите зафиксировать отказ"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Зафиксируйте все дефекты",
+                "text": "Сфотографируйте общий вид и каждый дефект крупным планом, снимите видео с комментариями"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Составьте акт о недостатках",
+                "text": "Опишите каждый дефект с указанием расположения и размеров, приложите фотографии"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Отправьте письменную претензию",
+                "text": "Отправьте претензию заказным письмом с описью вложения в течение 4-7 дней"
+              }
+            ],
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": canonicalUrl
+            }
+          })}
+        </script>
       </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">

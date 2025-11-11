@@ -95,6 +95,34 @@ const DogovorPage = () => {
         <meta property="og:description" content="5 ключевых пунктов договора на изготовление кухни: сроки, материалы, условия возврата, цена и реквизиты." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "На что обратить внимание при заказе кухни",
+            "description": "5 ключевых пунктов договора на изготовление кухни: сроки, материалы, условия возврата, цена и реквизиты. Как защитить себя от недобросовестных производителей.",
+            "author": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/favicon-1762792088542.svg"
+              }
+            },
+            "datePublished": "2025-11-11",
+            "dateModified": "2025-11-11",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": canonicalUrl
+            },
+            "articleSection": "Договор",
+            "keywords": "договор на кухню, заказ кухни, права потребителей, проверка договора, материалы кухни"
+          })}
+        </script>
       </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">

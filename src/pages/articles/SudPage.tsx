@@ -209,6 +209,38 @@ const SudPage = () => {
         <meta property="og:description" content="Реальная судебная практика: 5 кейсов с взысканием от 300 тыс. до 2 млн рублей. Средний коэффициент взыскания 183% от стоимости." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "Топ-5 решений суда в пользу покупателей",
+            "description": "Реальная судебная практика по спорам с производителями кухонь. 5 кейсов с взысканием от 300 до 2 млн рублей. Как суды определяют компенсацию.",
+            "author": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "ЮК Закон Кухни",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/favicon-1762792088542.svg"
+              }
+            },
+            "datePublished": "2025-11-11",
+            "dateModified": "2025-11-11",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": canonicalUrl
+            },
+            "articleSection": "Судебная практика",
+            "keywords": "судебная практика, решения суда, взыскание компенсации, защита прав потребителей, просрочка кухни",
+            "about": {
+              "@type": "Thing",
+              "name": "Судебная практика по защите прав потребителей"
+            }
+          })}
+        </script>
       </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
