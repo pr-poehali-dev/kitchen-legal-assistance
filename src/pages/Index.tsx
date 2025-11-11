@@ -1140,12 +1140,14 @@ const Index = () => {
                           if (line.startsWith('## ')) return <h3 key={i} className="text-xl font-bold mt-5 mb-3">{line.replace('## ', '')}</h3>;
                           if (line.startsWith('### ')) return <h4 key={i} className="text-lg font-bold mt-4 mb-2">{line.replace('### ', '')}</h4>;
                           if (line.startsWith('**') && line.endsWith('**')) return <p key={i} className="font-bold mt-3 mb-2">{line.replace(/\*\*/g, '')}</p>;
-                          if (line.startsWith('- ✅')) return <li key={i} className="ml-4 mb-1 text-green-700">{line.replace('- ✅', '✅')}</li>;
-                          if (line.startsWith('- ❌')) return <li key={i} className="ml-4 mb-1 text-red-700">{line.replace('- ❌', '❌')}</li>;
-                          if (line.startsWith('- ')) return <li key={i} className="ml-4 mb-1">{line.replace('- ', '• ')}</li>;
+                          if (line.startsWith('- ✅')) return <li key={i} className="ml-4 mb-1 list-none text-green-700">{line.replace('- ✅', '✅')}</li>;
+                          if (line.startsWith('- ❌')) return <li key={i} className="ml-4 mb-1 list-none text-red-700">{line.replace('- ❌', '❌')}</li>;
+                          if (line.startsWith('- ')) return <li key={i} className="ml-6 mb-1 list-disc">{line.replace('- ', '')}</li>;
                           if (line.startsWith('---')) return <hr key={i} className="my-6 border-t-2" />;
                           if (line.trim() === '') return <br key={i} />;
-                          return <p key={i} className="mb-3 leading-relaxed">{line}</p>;
+                          
+                          const processedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                          return <p key={i} className="mb-3 leading-relaxed" dangerouslySetInnerHTML={{ __html: processedLine }} />;
                         })}
                       </div>
                       <div className="mt-6 pt-6 border-t">
