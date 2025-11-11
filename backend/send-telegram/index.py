@@ -60,6 +60,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
     chat_id = os.environ.get('TELEGRAM_CHAT_ID')
     
+    print(f"Bot token exists: {bool(bot_token)}, Chat ID: {chat_id}")
+    
     if not bot_token or not chat_id:
         return {
             'statusCode': 500,
@@ -90,6 +92,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     try:
         with urllib.request.urlopen(req) as response:
             response_data = response.read()
+            print(f"Telegram API response: {response_data.decode('utf-8')[:200]}")
             
         return {
             'statusCode': 200,
@@ -101,6 +104,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
     except Exception as e:
+        print(f"Error sending to Telegram: {str(e)}")
         return {
             'statusCode': 500,
             'headers': {
