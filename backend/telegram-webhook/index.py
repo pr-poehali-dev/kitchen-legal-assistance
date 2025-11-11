@@ -205,8 +205,16 @@ def send_telegram_message(bot_token: str, chat_id: int, text: str) -> None:
     
     req = urllib.request.Request(url, data=data, headers=headers, method='POST')
     
-    with urllib.request.urlopen(req, timeout=10) as response:
-        response.read()
+    try:
+        with urllib.request.urlopen(req, timeout=10) as response:
+            result = json.loads(response.read().decode('utf-8'))
+            if not result.get('ok'):
+                print(f"Telegram API error: {result}")
+                raise Exception(f"Telegram API returned ok=false: {result.get('description')}")
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode('utf-8')
+        print(f"HTTP error sending message to {chat_id}: {e.code} - {error_body}")
+        raise
 
 
 def save_conversation(database_url: str, chat_id: int, user_name: str, user_username: str, 
