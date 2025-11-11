@@ -27,6 +27,7 @@ const Index = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [message, setMessage] = useState('');
   const [showStickyButton, setShowStickyButton] = useState(false);
+  const [isStickyButtonDismissed, setIsStickyButtonDismissed] = useState(false);
   const [showExitIntent, setShowExitIntent] = useState(false);
   const [exitIntentShown, setExitIntentShown] = useState(false);
   const [showInlineForm, setShowInlineForm] = useState(false);
@@ -1733,26 +1734,37 @@ const Index = () => {
         </button>
       )}
 
-      {showStickyButton && (
-        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary to-blue-700 text-white py-4 px-4 shadow-2xl z-40 animate-fade-in">
-          <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 animate-pulse">
-                <Icon name="Phone" className="text-white" size={24} />
+      {showStickyButton && !isStickyButtonDismissed && (
+        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary to-blue-700 text-white shadow-2xl z-40 animate-fade-in">
+          <div className="container mx-auto">
+            <div className="flex items-center justify-between gap-2 py-3 px-4 md:py-4">
+              <div className="flex items-center gap-2 flex-1 min-w-0">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Icon name="Phone" className="text-white" size={20} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-sm md:text-base truncate">Бесплатная консультация</div>
+                  <div className="text-white/90 text-xs md:text-sm hidden sm:block">Рассчитаем неустойку за 15 минут</div>
+                </div>
               </div>
-              <div className="text-center sm:text-left">
-                <div className="font-bold text-lg">Бесплатная консультация за 15 минут</div>
-                <div className="text-white/90 text-sm">Рассчитаем вашу неустойку прямо сейчас</div>
+              <div className="flex items-center gap-2">
+                <Button 
+                  onClick={() => setIsCallbackDialogOpen(true)}
+                  size="sm"
+                  className="bg-secondary text-secondary-foreground hover:bg-yellow-400 font-bold shadow-xl text-xs md:text-sm px-3 md:px-4 whitespace-nowrap"
+                >
+                  <Icon name="Sparkles" className="mr-1 md:mr-2" size={16} />
+                  Заказать
+                </Button>
+                <button
+                  onClick={() => setIsStickyButtonDismissed(true)}
+                  className="w-8 h-8 flex items-center justify-center hover:bg-white/10 rounded-full transition-colors flex-shrink-0"
+                  aria-label="Закрыть"
+                >
+                  <Icon name="X" className="text-white" size={18} />
+                </button>
               </div>
             </div>
-            <Button 
-              onClick={() => setIsCallbackDialogOpen(true)}
-              size="lg" 
-              className="bg-secondary text-secondary-foreground hover:bg-yellow-400 font-bold shadow-xl whitespace-nowrap"
-            >
-              <Icon name="Sparkles" className="mr-2" size={20} />
-              Получить консультацию
-            </Button>
           </div>
         </div>
       )}
