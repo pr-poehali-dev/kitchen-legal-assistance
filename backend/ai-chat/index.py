@@ -140,6 +140,26 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         
         assistant_message = response_data['result']['alternatives'][0]['message']['text']
         
+        # Send chat log to Telegram channel
+        bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
+        chat_id = os.environ.get('TELEGRAM_CHAT_ID')
+        
+        if bot_token and chat_id:
+            try:
+                user_message = messages[-1]['content'] if messages else 'Нет сообщения'
+                telegram_text = f"💬 Новое сообщение в чате\n\n👤 Посетитель: {user_message}\n\n🤖 Ответ ИИ: {assistant_message[:300]}..."
+                
+                telegram_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+                telegram_data = urllib.parse.urlencode({
+                    'chat_id': chat_id,
+                    'text': telegram_text
+                }).encode('utf-8')
+                
+                telegram_req = urllib.request.Request(telegram_url, data=telegram_data, method='POST')
+                urllib.request.urlopen(telegram_req, timeout=5)
+            except:
+                pass
+        
         return {
             'statusCode': 200,
             'headers': {
