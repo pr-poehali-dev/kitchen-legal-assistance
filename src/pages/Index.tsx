@@ -581,7 +581,7 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
-              <Card className="bg-gradient-to-br from-primary/10 via-blue-50 to-secondary/10 border-2 border-primary/30 shadow-lg animate-scale-in hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <Card className="bg-gradient-to-br from-primary/10 via-blue-50 to-secondary/10 border-2 border-primary/30 shadow-lg animate-scale-in animate-gradient hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0 animate-pulse">
