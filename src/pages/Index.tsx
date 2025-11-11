@@ -581,10 +581,10 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
-              <Card className="bg-gradient-to-br from-primary/10 via-blue-50 to-secondary/10 border-2 border-primary/30 shadow-lg">
+              <Card className="bg-gradient-to-br from-primary/10 via-blue-50 to-secondary/10 border-2 border-primary/30 shadow-lg animate-scale-in hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0 animate-pulse">
                       <Icon name="Scale" className="text-white" size={24} />
                     </div>
                     <div>
@@ -593,9 +593,6 @@ const Index = () => {
                       </div>
                       <div className="text-lg font-bold text-foreground leading-snug">
                         Специализируемся на защите прав покупателей кухонных гарнитуров
-                      </div>
-                      <div className="text-sm text-muted-foreground mt-2">
-                        Взыскиваем неустойки, возвращаем деньги, представляем интересы в суде
                       </div>
                     </div>
                   </div>
