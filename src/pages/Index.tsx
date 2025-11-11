@@ -746,27 +746,64 @@ const Index = () => {
             ))}
           </div>
 
-          <div className="bg-gradient-to-br from-primary to-blue-700 rounded-2xl p-8 md:p-12 text-white">
-            <div className="max-w-3xl">
-              <h3 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-primary to-blue-700 rounded-2xl p-8 md:p-10 text-white">
+              <h3 className="text-3xl font-bold mb-6">
                 Как мы решаем ваши проблемы
               </h3>
-              <div className="space-y-4 mt-8">
+              <div className="space-y-4">
                 {[
                   { step: "1", title: "Бесплатная консультация", description: "Анализируем ваш договор и ситуацию за 15 минут" },
                   { step: "2", title: "Досудебная претензия", description: "Составляем требование с расчётом неустойки и отправляем продавцу" },
                   { step: "3", title: "Получение результата", description: "В 70% случаев получаем деньги без суда. Иначе — идём в суд и выигрываем" }
                 ].map((step, index) => (
                   <div key={index} className="flex gap-4 items-start">
-                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 font-bold text-xl">
+                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-lg">
                       {step.step}
                     </div>
                     <div>
-                      <div className="font-bold text-lg">{step.title}</div>
-                      <div className="text-white/80">{step.description}</div>
+                      <div className="font-bold text-lg mb-1">{step.title}</div>
+                      <div className="text-white/85 text-sm leading-relaxed">{step.description}</div>
                     </div>
                   </div>
                 ))}
+              </div>
+              <div className="mt-8 pt-6 border-t border-white/20">
+                <Button onClick={() => scrollToSection('contacts')} size="lg" className="w-full bg-white text-primary hover:bg-white/90 font-bold">
+                  <Icon name="MessageCircle" className="mr-2" size={20} />
+                  Получить консультацию
+                </Button>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 md:p-10 border-2 border-green-200">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+                  <Icon name="TrendingUp" className="text-white" size={24} />
+                </div>
+                <h3 className="text-2xl font-bold text-green-900">Наши результаты</h3>
+              </div>
+              
+              <div className="space-y-5">
+                <div className="bg-white/60 rounded-xl p-4">
+                  <div className="text-3xl font-bold text-green-700 mb-1">15 млн ₽</div>
+                  <div className="text-sm text-green-900">Взыскано для клиентов за 2024 год</div>
+                </div>
+                
+                <div className="bg-white/60 rounded-xl p-4">
+                  <div className="text-3xl font-bold text-green-700 mb-1">95%</div>
+                  <div className="text-sm text-green-900">Выигранных дел в суде</div>
+                </div>
+                
+                <div className="bg-white/60 rounded-xl p-4">
+                  <div className="text-3xl font-bold text-green-700 mb-1">70%</div>
+                  <div className="text-sm text-green-900">Дел решаются без суда</div>
+                </div>
+                
+                <div className="bg-white/60 rounded-xl p-4">
+                  <div className="text-3xl font-bold text-green-700 mb-1">2-6 мес</div>
+                  <div className="text-sm text-green-900">Средний срок получения денег</div>
+                </div>
               </div>
             </div>
           </div>
