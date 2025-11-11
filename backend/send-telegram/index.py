@@ -70,7 +70,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
     
-    # Format message
+    # Format message for channel
     message = f"🔔 Новая заявка на обратный звонок!\n\n👤 Имя: {name}\n📞 Телефон: {phone}"
     
     if user_message:
