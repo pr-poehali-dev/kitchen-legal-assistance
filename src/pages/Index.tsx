@@ -716,7 +716,7 @@ const Index = () => {
               </div>
               <div>
                 <div className="text-2xl font-bold text-white drop-shadow-md whitespace-nowrap">ЮК "Вернём кухню"</div>
-                <div className="text-xs text-white/80 font-medium whitespace-nowrap">Ваш юрист по мебельным спорам</div>
+                <div className="text-xs text-white/80 font-medium whitespace-nowrap tracking-[0.15em]">Ваш юрист по мебельным спорам</div>
               </div>
             </button>
             
