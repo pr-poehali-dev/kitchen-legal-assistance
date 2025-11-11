@@ -39,10 +39,15 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
     
-    # Get updates to see recent chats
-    url = f"https://api.telegram.org/bot{bot_token}/getUpdates"
+    # First delete webhook to allow getUpdates
+    delete_webhook_url = f"https://api.telegram.org/bot{bot_token}/deleteWebhook"
     
     try:
+        req = urllib.request.Request(delete_webhook_url, method='GET')
+        urllib.request.urlopen(req, timeout=10)
+        
+        # Now get updates to see recent chats
+        url = f"https://api.telegram.org/bot{bot_token}/getUpdates"
         req = urllib.request.Request(url, method='GET')
         with urllib.request.urlopen(req, timeout=10) as response:
             data = json.loads(response.read().decode('utf-8'))
