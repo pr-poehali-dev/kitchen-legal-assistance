@@ -815,6 +815,10 @@ const Index = () => {
                   <div className="text-3xl font-bold text-primary">3%</div>
                   <div className="text-base text-foreground/70">Неустойка в день</div>
                 </div>
+                <div>
+                  <div className="text-3xl font-bold text-primary">10 лет</div>
+                  <div className="text-base text-foreground/70">Юридического опыта</div>
+                </div>
               </div>
               <div className="mt-6 pt-6 border-t border-foreground/10">
                 <div className="flex items-center gap-6 flex-wrap">
