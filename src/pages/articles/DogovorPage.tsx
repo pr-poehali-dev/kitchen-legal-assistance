@@ -4,6 +4,7 @@ import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
+import ChatWidget from '@/components/ChatWidget';
 
 const DogovorPage = () => {
   const navigate = useNavigate();
@@ -201,6 +202,8 @@ const DogovorPage = () => {
           <Icon name="ArrowUp" size={18} />
         </button>
       )}
+      
+      <ChatWidget />
     </div>
   );
 };

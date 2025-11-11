@@ -4,6 +4,7 @@ import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
+import ChatWidget from '@/components/ChatWidget';
 
 const SudPage = () => {
   const navigate = useNavigate();
@@ -322,6 +323,7 @@ const SudPage = () => {
           <Icon name="ArrowUp" size={18} />
         </button>
       )}
+      <ChatWidget />
     </div>
   );
 };
