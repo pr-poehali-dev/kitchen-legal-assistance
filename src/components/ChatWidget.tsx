@@ -147,14 +147,28 @@ const ChatWidget = () => {
   return (
     <>
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 left-6 w-16 h-16 bg-gradient-to-br from-primary to-blue-700 hover:from-primary/90 hover:to-blue-700/90 text-white rounded-full shadow-2xl flex items-center justify-center z-50 transition-all hover:scale-110 animate-fade-in group"
-          aria-label="Открыть чат"
-        >
-          <Icon name="MessageSquare" size={28} />
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
-        </button>
+        <div className="fixed bottom-24 left-6 z-50 animate-fade-in">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="relative w-16 h-16 bg-gradient-to-br from-primary to-blue-700 hover:from-primary/90 hover:to-blue-700/90 text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 group"
+            aria-label="Открыть чат"
+          >
+            <Icon name="MessageCircle" size={28} className="animate-pulse" />
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></div>
+            
+            {/* Пульсирующие кольца */}
+            <div className="absolute inset-0 rounded-full bg-primary/30 animate-ping"></div>
+            <div className="absolute inset-0 rounded-full bg-primary/20 animate-pulse"></div>
+          </button>
+          
+          {/* Подсказка */}
+          <div className="absolute bottom-full left-0 mb-3 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="bg-white text-gray-800 px-4 py-2 rounded-lg shadow-xl border border-primary/20 text-sm font-medium">
+              💬 Задайте вопрос юристу
+              <div className="absolute top-full left-8 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white"></div>
+            </div>
+          </div>
+        </div>
       )}
 
       {isOpen && (
