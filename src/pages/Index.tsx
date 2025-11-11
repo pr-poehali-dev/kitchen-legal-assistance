@@ -35,6 +35,7 @@ const Index = () => {
   const [onlineCount, setOnlineCount] = useState(0);
   const [navVisible, setNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [navOpacity, setNavOpacity] = useState(90);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +47,11 @@ const Index = () => {
       } else {
         setNavVisible(true);
       }
+      
+      // Change opacity based on scroll (from 90% to 98%)
+      const maxScroll = 300;
+      const opacity = Math.min(90 + (currentScrollY / maxScroll) * 8, 98);
+      setNavOpacity(opacity);
       
       setLastScrollY(currentScrollY);
       setShowScrollTop(currentScrollY > 400);
@@ -694,9 +700,12 @@ const Index = () => {
           })}
         </script>
       </Helmet>
-      <nav className={`fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-md border-b-2 border-primary/20 transition-transform duration-300 ${
-        navVisible ? 'translate-y-0' : '-translate-y-full'
-      }`}>
+      <nav 
+        className={`fixed top-0 w-full backdrop-blur-md z-50 shadow-md border-b-2 border-primary/20 transition-all duration-300 ${
+          navVisible ? 'translate-y-0' : '-translate-y-full'
+        }`}
+        style={{ backgroundColor: `rgba(255, 255, 255, ${navOpacity / 100})` }}
+      >
         <div className="container mx-auto px-4 py-5">
           <div className="flex items-center justify-between">
             <button onClick={scrollToTop} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
