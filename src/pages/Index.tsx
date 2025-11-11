@@ -33,16 +33,28 @@ const Index = () => {
   const [showInlineForm, setShowInlineForm] = useState(false);
   const [viewCount, setViewCount] = useState(0);
   const [onlineCount, setOnlineCount] = useState(0);
+  const [navVisible, setNavVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-      const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      const currentScrollY = window.scrollY;
+      
+      // Hide nav when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setNavVisible(false);
+      } else {
+        setNavVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+      setShowScrollTop(currentScrollY > 400);
+      const scrollPercentage = (currentScrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
       setShowStickyButton(scrollPercentage > 30);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {
@@ -682,7 +694,9 @@ const Index = () => {
           })}
         </script>
       </Helmet>
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-md border-b-2 border-primary/20">
+      <nav className={`fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 shadow-md border-b-2 border-primary/20 transition-transform duration-300 ${
+        navVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
         <div className="container mx-auto px-4 py-5">
           <div className="flex items-center justify-between">
             <button onClick={scrollToTop} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
