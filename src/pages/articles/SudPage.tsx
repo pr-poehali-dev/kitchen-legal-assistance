@@ -2,9 +2,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const SudPage = () => {
   const navigate = useNavigate();
+  const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app/blog/sud';
 
   const handleWhatsAppClick = () => {
     const phoneNumber = '79059940069';
@@ -199,6 +201,15 @@ const SudPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Топ-5 решений суда в пользу покупателей кухонь | ЮК "Закон Кухни"</title>
+        <meta name="description" content="Реальная судебная практика по спорам с производителями кухонь. 5 кейсов с взысканием от 300 до 2 млн рублей. Как суды определяют компенсацию." />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content="Топ-5 решений суда в пользу покупателей кухонь" />
+        <meta property="og:description" content="Реальная судебная практика: 5 кейсов с взысканием от 300 тыс. до 2 млн рублей. Средний коэффициент взыскания 183% от стоимости." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+      </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">

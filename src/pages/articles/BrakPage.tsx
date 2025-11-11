@@ -2,9 +2,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const BrakPage = () => {
   const navigate = useNavigate();
+  const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app/blog/brak';
 
   const handleWhatsAppClick = () => {
     const phoneNumber = '79059940069';
@@ -136,6 +138,15 @@ const BrakPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Обнаружили брак кухни? Инструкция к действию | ЮК "Закон Кухни"</title>
+        <meta name="description" content="Пошаговая инструкция при обнаружении брака кухни: фотофиксация, акт о недостатках, претензия. Как взыскать компенсацию за дефекты." />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content="Обнаружили брак кухни? Инструкция к действию" />
+        <meta property="og:description" content="Пошаговая инструкция: фотофиксация, акт, претензия. Как взыскать компенсацию за дефекты." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+      </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">

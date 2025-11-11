@@ -2,9 +2,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const NeustoikaPage = () => {
   const navigate = useNavigate();
+  const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app/blog/neustoika';
 
   const handleWhatsAppClick = () => {
     const phoneNumber = '79059940069';
@@ -96,6 +98,15 @@ const NeustoikaPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Как рассчитать неустойку за просрочку кухни | ЮК "Закон Кухни"</title>
+        <meta name="description" content="Формула расчета неустойки 3% в день за просрочку изготовления кухни. Примеры расчетов, ограничения неустойки, что еще можно взыскать с производителя." />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:title" content="Как рассчитать неустойку за просрочку кухни" />
+        <meta property="og:description" content="Формула расчета неустойки 3% в день за просрочку изготовления кухни. Примеры расчетов и инструкция." />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+      </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">

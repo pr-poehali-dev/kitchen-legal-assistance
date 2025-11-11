@@ -8,9 +8,11 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Index = () => {
   const navigate = useNavigate();
+  const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCallbackDialogOpen, setIsCallbackDialogOpen] = useState(false);
   const [name, setName] = useState('');
@@ -540,6 +542,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <link rel="canonical" href={canonicalUrl} />
+      </Helmet>
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
