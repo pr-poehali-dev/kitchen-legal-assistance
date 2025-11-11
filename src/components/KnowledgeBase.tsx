@@ -3,7 +3,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
-import ReactMarkdown from 'react-markdown';
 
 interface Article {
   badge: string;
@@ -59,8 +58,8 @@ const KnowledgeBase = ({ articles }: KnowledgeBaseProps) => {
                 </Button>
                 
                 {selectedArticle === index && (
-                  <div className="mt-6 pt-6 border-t prose prose-sm max-w-none dark:prose-invert">
-                    <ReactMarkdown>{article.fullText}</ReactMarkdown>
+                  <div className="mt-6 pt-6 border-t prose prose-sm max-w-none dark:prose-invert text-left whitespace-pre-wrap">
+                    {article.fullText}
                   </div>
                 )}
               </CardContent>
