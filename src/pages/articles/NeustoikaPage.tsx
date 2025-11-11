@@ -116,7 +116,7 @@ const NeustoikaPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Как рассчитать неустойку за просрочку кухни | ЮК "Закон Кухни"</title>
+        <title>Как рассчитать неустойку за просрочку кухни | ЮК "Вернём кухню"</title>
         <meta name="description" content="Формула расчета неустойки 3% в день за просрочку изготовления кухни. Примеры расчетов, ограничения неустойки, что еще можно взыскать с производителя." />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content="Как рассчитать неустойку за просрочку кухни" />
@@ -131,11 +131,11 @@ const NeustoikaPage = () => {
             "description": "Формула расчета неустойки 3% в день за просрочку изготовления кухни. Примеры расчетов, ограничения неустойки, что еще можно взыскать с производителя.",
             "author": {
               "@type": "Organization",
-              "name": "ЮК Закон Кухни"
+              "name": "ЮК Вернём кухню"
             },
             "publisher": {
               "@type": "Organization",
-              "name": "ЮК Закон Кухни",
+              "name": "ЮК Вернём кухню",
               "logo": {
                 "@type": "ImageObject",
                 "url": "https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/favicon-1762792088542.svg"
@@ -157,7 +157,10 @@ const NeustoikaPage = () => {
           <div className="flex items-center justify-between">
             <button onClick={() => navigate('/')} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <Icon name="Scale" className="text-primary" size={32} />
-              <span className="text-2xl font-bold text-primary">ЮК "Закон Кухни"</span>
+              <div className="text-left">
+                <div className="text-2xl font-bold text-primary">ЮК "Вернём кухню"</div>
+                <div className="text-xs text-primary/70 font-medium">Ваш юрист по мебельным спорам</div>
+              </div>
             </button>
             <Button onClick={() => navigate('/#contacts')} className="bg-gradient-to-r from-primary to-blue-700">
               Бесплатная консультация

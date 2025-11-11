@@ -675,12 +675,12 @@ const Index = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Blog",
-            "name": "Блог ЮК Закон Кухни",
+            "name": "Блог ЮК Вернём кухню",
             "description": "Полезные статьи о защите прав потребителей при заказе кухонь",
             "url": `${canonicalUrl}#blog`,
             "publisher": {
               "@type": "Organization",
-              "name": "ЮК Закон Кухни",
+              "name": "ЮК Вернём кухню",
               "logo": {
                 "@type": "ImageObject",
                 "url": "https://cdn.poehali.dev/projects/45e8ce2f-3239-4080-877c-91b46ab54c94/files/favicon-1762792088542.svg"
@@ -694,7 +694,7 @@ const Index = () => {
               "datePublished": "2025-11-11",
               "author": {
                 "@type": "Organization",
-                "name": "ЮК Закон Кухни"
+                "name": "ЮК Вернём кухню"
               }
             }))
           })}
@@ -714,7 +714,10 @@ const Index = () => {
               <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center shadow-md border border-white/30">
                 <Icon name="Scale" className="text-white" size={24} />
               </div>
-              <span className="text-2xl font-bold text-white drop-shadow-md">ЮК "Закон Кухни"</span>
+              <div className="text-left">
+                <div className="text-2xl font-bold text-white drop-shadow-md">ЮК "Вернём кухню"</div>
+                <div className="text-xs text-white/80 font-medium">Ваш юрист по мебельным спорам</div>
+              </div>
             </button>
             
             <div className="hidden md:flex items-center gap-8">
@@ -1726,7 +1729,7 @@ const Index = () => {
 
             <div className="mt-8">
               <div className="text-sm text-white/70">
-                Юридическая компания "Закон Кухни"
+                Юридическая компания "Вернём кухню"
               </div>
             </div>
           </div>
@@ -1737,7 +1740,10 @@ const Index = () => {
         <div className="container mx-auto text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Icon name="Scale" size={24} />
-            <span className="text-xl font-bold">ЮК "Закон Кухни"</span>
+            <div className="text-center">
+              <div className="text-xl font-bold">ЮК "Вернём кухню"</div>
+              <div className="text-sm text-background/60 mt-1">Ваш юрист по мебельным спорам</div>
+            </div>
           </div>
           <p className="text-background/70">© 2024 Все права защищены</p>
         </div>
