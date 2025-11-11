@@ -10,6 +10,8 @@ const BrakPage = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+    
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
@@ -212,7 +214,7 @@ const BrakPage = () => {
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <button onClick={scrollToTop} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <button onClick={() => navigate('/')} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <Icon name="Scale" className="text-primary" size={32} />
               <span className="text-2xl font-bold text-primary">ЮК "Закон Кухни"</span>
             </button>
