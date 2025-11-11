@@ -581,23 +581,25 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
-              <Card className="bg-gradient-to-br from-primary/10 via-blue-50 to-secondary/10 border-2 border-primary/30 shadow-lg animate-scale-in animate-gradient hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center flex-shrink-0 animate-pulse">
-                      <Icon name="Scale" className="text-white" size={24} />
-                    </div>
-                    <div>
-                      <div className="text-sm font-semibold text-primary mb-1 uppercase tracking-wide">
-                        Юридическая компания "Закон Кухни"
+              <div className="inline-block">
+                <Card className="bg-gradient-to-r from-primary via-blue-600 to-blue-700 border-0 shadow-2xl animate-scale-in animate-gradient hover:shadow-[0_20px_60px_rgba(37,99,235,0.4)] transition-all duration-500 hover:scale-105 backdrop-blur-sm">
+                  <CardContent className="p-5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 backdrop-blur-md">
+                        <Icon name="Scale" className="text-white" size={20} />
                       </div>
-                      <div className="text-lg font-bold text-foreground leading-snug">
-                        Специализируемся на защите прав покупателей кухонных гарнитуров
+                      <div>
+                        <div className="text-white/90 text-xs font-medium tracking-widest uppercase mb-0.5">
+                          Юридическая компания
+                        </div>
+                        <div className="text-xl font-bold text-white leading-tight tracking-tight">
+                          Закон Кухни
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
                 Проблемы с кухней на заказ?{' '}
                 <span className="text-primary">Вернем деньги</span> и нервы!
