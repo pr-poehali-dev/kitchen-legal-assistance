@@ -894,13 +894,20 @@ const Index = () => {
                 description: "Потеряли доверие к исполнителю? Вернём 100% предоплаты + неустойку + моральный вред."
               }
             ].map((problem, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                <CardContent className="pt-6 space-y-4">
-                  <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <Icon name={problem.icon} className="text-primary" size={28} />
+              <Card key={index} className="relative overflow-hidden bg-gradient-to-br from-white to-gray-50 border-2 hover:border-primary/30 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 animate-fade-in-up group" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500"></div>
+                <CardContent className="pt-8 pb-6 px-6 space-y-4 relative z-10">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Icon name={problem.icon} className="text-white" size={32} />
                   </div>
-                  <h3 className="text-2xl font-bold">{problem.title}</h3>
-                  <p className="text-base text-foreground/75 leading-relaxed">{problem.description}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors">{problem.title}</h3>
+                  <p className="text-base text-foreground/80 leading-relaxed">{problem.description}</p>
+                  <div className="pt-2">
+                    <div className="inline-flex items-center text-primary font-semibold text-sm group-hover:gap-2 transition-all">
+                      Помогаем решить
+                      <Icon name="ArrowRight" className="ml-1 group-hover:translate-x-1 transition-transform" size={16} />
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
