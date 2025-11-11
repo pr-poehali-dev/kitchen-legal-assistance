@@ -776,7 +776,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 md:p-10 border-2 border-green-200">
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 md:p-10 border-2 border-green-200 animate-fade-in">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
                   <Icon name="TrendingUp" className="text-white" size={24} />
@@ -785,25 +785,21 @@ const Index = () => {
               </div>
               
               <div className="space-y-5">
-                <div className="bg-white/60 rounded-xl p-4">
-                  <div className="text-3xl font-bold text-green-700 mb-1">15 млн ₽</div>
-                  <div className="text-sm text-green-900">Взыскано для клиентов за 2024 год</div>
-                </div>
-                
-                <div className="bg-white/60 rounded-xl p-4">
-                  <div className="text-3xl font-bold text-green-700 mb-1">95%</div>
-                  <div className="text-sm text-green-900">Выигранных дел в суде</div>
-                </div>
-                
-                <div className="bg-white/60 rounded-xl p-4">
-                  <div className="text-3xl font-bold text-green-700 mb-1">70%</div>
-                  <div className="text-sm text-green-900">Дел решаются без суда</div>
-                </div>
-                
-                <div className="bg-white/60 rounded-xl p-4">
-                  <div className="text-3xl font-bold text-green-700 mb-1">2-6 мес</div>
-                  <div className="text-sm text-green-900">Средний срок получения денег</div>
-                </div>
+                {[
+                  { value: "15 млн ₽", label: "Взыскано для клиентов за 2024 год", delay: "0s" },
+                  { value: "95%", label: "Выигранных дел в суде", delay: "0.1s" },
+                  { value: "70%", label: "Дел решаются без суда", delay: "0.2s" },
+                  { value: "2-6 мес", label: "Средний срок получения денег", delay: "0.3s" }
+                ].map((stat, index) => (
+                  <div 
+                    key={index} 
+                    className="bg-white/60 rounded-xl p-4 animate-scale-in hover:bg-white/80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                    style={{ animationDelay: stat.delay }}
+                  >
+                    <div className="text-3xl font-bold text-green-700 mb-1">{stat.value}</div>
+                    <div className="text-sm text-green-900">{stat.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
