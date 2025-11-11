@@ -581,29 +581,30 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
+              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+                Проблемы с кухней на заказ?{' '}
+                <span className="text-primary">Вернем деньги</span> и нервы!
+              </h1>
               <div className="inline-block">
-                <Card className="bg-gradient-to-r from-primary via-blue-600 to-blue-700 border-0 shadow-2xl animate-scale-in animate-gradient hover:shadow-[0_20px_60px_rgba(37,99,235,0.4)] transition-all duration-500 hover:scale-105 backdrop-blur-sm">
-                  <CardContent className="p-5">
+                <Card className="relative bg-gradient-to-r from-primary via-blue-600 to-blue-700 border-0 shadow-2xl animate-scale-in animate-gradient hover:shadow-[0_20px_60px_rgba(37,99,235,0.4)] transition-all duration-500 hover:scale-105 backdrop-blur-sm overflow-hidden">
+                  <div className="absolute inset-0 bg-white/5 rounded-lg ring-1 ring-white/20 ring-inset"></div>
+                  <CardContent className="relative p-4 px-5">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 backdrop-blur-md">
-                        <Icon name="Scale" className="text-white" size={20} />
+                      <div className="w-11 h-11 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 backdrop-blur-md ring-1 ring-white/30">
+                        <Icon name="Scale" className="text-white drop-shadow-lg" size={22} />
                       </div>
-                      <div>
-                        <div className="text-white/90 text-xs font-medium tracking-widest uppercase mb-0.5">
+                      <div className="flex-1">
+                        <div className="text-white/80 text-[10px] font-semibold tracking-[0.2em] uppercase mb-1 drop-shadow-sm">
                           Юридическая компания
                         </div>
-                        <div className="text-xl font-bold text-white leading-tight tracking-tight">
-                          Закон Кухни
+                        <div className="text-2xl font-extrabold text-white leading-none tracking-tight drop-shadow-md">
+                          ЗАКОН КУХНИ
                         </div>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Проблемы с кухней на заказ?{' '}
-                <span className="text-primary">Вернем деньги</span> и нервы!
-              </h1>
               <p className="text-xl text-muted-foreground">
                 Юридическая помощь по правам покупателей кухонных гарнитуров. Неустойка до 3% в день, возврат 100% средств.
               </p>
