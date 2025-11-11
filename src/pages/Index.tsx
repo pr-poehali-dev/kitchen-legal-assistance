@@ -582,6 +582,7 @@ const Index = () => {
             </div>
             
             <div className="hidden md:flex items-center gap-8">
+              <button onClick={() => scrollToSection('how-we-work')} className="text-foreground hover:text-primary transition-colors">Как работаем</button>
               <button onClick={() => scrollToSection('services')} className="text-foreground hover:text-primary transition-colors">Услуги</button>
               <button onClick={() => scrollToSection('pricing')} className="text-foreground hover:text-primary transition-colors">Цены</button>
               <button onClick={() => scrollToSection('about')} className="text-foreground hover:text-primary transition-colors">О нас</button>
@@ -600,6 +601,7 @@ const Index = () => {
 
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 space-y-3 animate-fade-in-up">
+              <button onClick={() => scrollToSection('how-we-work')} className="block w-full text-left py-2 hover:text-primary">Как работаем</button>
               <button onClick={() => scrollToSection('services')} className="block w-full text-left py-2 hover:text-primary">Услуги</button>
               <button onClick={() => scrollToSection('pricing')} className="block w-full text-left py-2 hover:text-primary">Цены</button>
               <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 hover:text-primary">О нас</button>
@@ -758,7 +760,111 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="services" className="py-20 px-4">
+      <section id="how-we-work" className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <Badge className="mb-4">Наш процесс</Badge>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              Как мы работаем
+            </h2>
+            <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed">
+              Прозрачный и понятный процесс — от первого звонка до получения денег
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            {[
+              {
+                step: "01",
+                icon: "Phone",
+                title: "Бесплатная консультация",
+                description: "Звоните или пишите в WhatsApp. Изучаем ваш договор, фотографии, документы. Рассчитываем неустойку и объясняем перспективы.",
+                duration: "15-30 минут",
+                color: "from-blue-500 to-blue-600"
+              },
+              {
+                step: "02",
+                icon: "FileText",
+                title: "Досудебная претензия",
+                description: "Составляем юридически грамотную претензию с расчётами. Отправляем производителю заказным письмом с уведомлением.",
+                duration: "3-5 дней",
+                color: "from-purple-500 to-purple-600"
+              },
+              {
+                step: "03",
+                icon: "MessageSquare",
+                title: "Переговоры",
+                description: "Ведём переговоры с производителем. В 70% случаев вопрос решается на этом этапе — вы получаете деньги без суда.",
+                duration: "10-30 дней",
+                color: "from-green-500 to-green-600"
+              },
+              {
+                step: "04",
+                icon: "Gavel",
+                title: "Суд (если нужно)",
+                description: "Подаём иск, представляем ваши интересы в суде. Взыскиваем неустойку + штраф 50% + все расходы с ответчика.",
+                duration: "2-6 месяцев",
+                color: "from-orange-500 to-orange-600"
+              }
+            ].map((step, index) => (
+              <div key={index} className="relative animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                {index < 3 && (
+                  <div className="hidden lg:block absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-transparent -translate-y-1/2 z-0" />
+                )}
+                <Card className="relative h-full hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary z-10 bg-white">
+                  <CardContent className="pt-8 pb-6 space-y-4">
+                    <div className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
+                      <Icon name={step.icon} className="text-white" size={32} />
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="inline-block px-3 py-1 bg-primary/10 rounded-full mb-3">
+                        <span className="text-sm font-bold text-primary">Этап {step.step}</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                    </div>
+                    
+                    <p className="text-sm text-foreground/70 leading-relaxed text-center min-h-[80px]">
+                      {step.description}
+                    </p>
+                    
+                    <div className="pt-4 border-t border-primary/10">
+                      <div className="flex items-center justify-center gap-2 text-primary">
+                        <Icon name="Clock" size={16} />
+                        <span className="text-sm font-semibold">{step.duration}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Card className="max-w-4xl mx-auto bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200">
+              <CardContent className="p-8 md:p-10">
+                <div className="flex flex-col md:flex-row items-center gap-6">
+                  <div className="w-20 h-20 bg-green-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <Icon name="CheckCircle" className="text-white" size={40} />
+                  </div>
+                  <div className="flex-1 text-center md:text-left">
+                    <h3 className="text-2xl font-bold mb-2 text-green-900">Результат гарантирован</h3>
+                    <p className="text-lg text-green-800">
+                      95% дел выигрываем. Оплата только после получения денег. Все судебные расходы взыскиваем с ответчика.
+                    </p>
+                  </div>
+                  <Button onClick={() => scrollToSection('contacts')} size="lg" className="bg-green-600 hover:bg-green-700 text-white flex-shrink-0">
+                    <Icon name="Phone" className="mr-2" size={20} />
+                    Начать сейчас
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-20 px-4 bg-muted/50">
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <Badge className="mb-4">Наши услуги</Badge>
