@@ -36,7 +36,15 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     # Parse Telegram update
-    body_data = json.loads(event.get('body', '{}'))
+    try:
+        body_data = json.loads(event.get('body', '{}'))
+    except json.JSONDecodeError:
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'application/json'},
+            'body': json.dumps({'ok': True}),
+            'isBase64Encoded': False
+        }
     
     # Extract message
     message = body_data.get('message', {})
@@ -57,10 +65,11 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     folder_id = os.environ.get('YANDEX_FOLDER_ID')
     
     if not bot_token or not yandex_api_key or not folder_id:
-        if bot_token:
+        if bot_token and chat_id:
             try:
-                send_telegram_message(bot_token, chat_id, "⚠️ Бот не настроен. Обратитесь к администратору.")
-            except:
+                error_msg = "⚠️ Бот временно недоступен.\n\nПожалуйста, попробуйте позже или свяжитесь с нами напрямую: +7 (999) 123-45-67"
+                send_telegram_message(bot_token, chat_id, error_msg)
+            except Exception:
                 pass
         return {
             'statusCode': 200,
@@ -73,10 +82,17 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     try:
         ai_response = get_yandex_gpt_response(user_text, yandex_api_key, folder_id)
         send_telegram_message(bot_token, chat_id, ai_response)
-    except Exception as e:
+    except urllib.error.HTTPError as e:
+        error_msg = "😔 Извините, сейчас не могу ответить на ваш вопрос.\n\nПопробуйте:\n• Задать вопрос по-другому\n• Написать позже\n• Позвонить нам: +7 (999) 123-45-67"
         try:
-            send_telegram_message(bot_token, chat_id, f"❌ Ошибка: {str(e)}")
-        except:
+            send_telegram_message(bot_token, chat_id, error_msg)
+        except Exception:
+            pass
+    except Exception as e:
+        error_msg = "⚠️ Произошла техническая ошибка.\n\nМы уже работаем над её устранением.\nА пока можете связаться с нами напрямую: +7 (999) 123-45-67"
+        try:
+            send_telegram_message(bot_token, chat_id, error_msg)
+        except Exception:
             pass
     
     return {
@@ -127,13 +143,16 @@ def get_yandex_gpt_response(user_message: str, api_key: str, folder_id: str) -> 
     data = json.dumps(payload).encode('utf-8')
     req = urllib.request.Request(url, data=data, headers=headers, method='POST')
     
-    with urllib.request.urlopen(req, timeout=30) as response:
-        response_data = json.loads(response.read().decode('utf-8'))
+    try:
+        with urllib.request.urlopen(req, timeout=30) as response:
+            response_data = json.loads(response.read().decode('utf-8'))
+    except urllib.error.URLError as e:
+        raise Exception(f"Не удалось подключиться к YandexGPT: {str(e)}")
     
     ai_text = response_data.get('result', {}).get('alternatives', [{}])[0].get('message', {}).get('text', '')
     
     if not ai_text:
-        return "Извините, не удалось получить ответ. Попробуйте переформулировать вопрос."
+        raise Exception("YandexGPT вернул пустой ответ")
     
     return ai_text
 
