@@ -802,23 +802,31 @@ const Index = () => {
                   Узнать больше
                 </Button>
               </div>
-              <div className="flex items-center gap-8 pt-6 flex-wrap">
-                <div>
-                  <div className="text-3xl font-bold text-primary">100+</div>
-                  <div className="text-base text-foreground/70">Выигранных дел</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary">15 млн ₽</div>
-                  <div className="text-base text-foreground/70">Возвращено клиентам</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary">3%</div>
-                  <div className="text-base text-foreground/70">Неустойка в день</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary">10 лет</div>
-                  <div className="text-base text-foreground/70">Юридического опыта</div>
-                </div>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pt-6">
+                <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20 hover:shadow-lg transition-all hover:scale-105">
+                  <CardContent className="p-4">
+                    <div className="text-3xl font-bold text-primary">100+</div>
+                    <div className="text-sm text-foreground/70 mt-1">Выигранных дел</div>
+                  </CardContent>
+                </Card>
+                <Card className="bg-gradient-to-br from-green-500/10 to-green-500/5 border-green-500/20 hover:shadow-lg transition-all hover:scale-105">
+                  <CardContent className="p-4">
+                    <div className="text-3xl font-bold text-green-600">15 млн ₽</div>
+                    <div className="text-sm text-foreground/70 mt-1">Возвращено клиентам</div>
+                  </CardContent>
+                </Card>
+                <Card className="bg-gradient-to-br from-orange-500/10 to-orange-500/5 border-orange-500/20 hover:shadow-lg transition-all hover:scale-105">
+                  <CardContent className="p-4">
+                    <div className="text-3xl font-bold text-orange-600">3%</div>
+                    <div className="text-sm text-foreground/70 mt-1">Неустойка в день</div>
+                  </CardContent>
+                </Card>
+                <Card className="bg-gradient-to-br from-blue-500/10 to-blue-500/5 border-blue-500/20 hover:shadow-lg transition-all hover:scale-105">
+                  <CardContent className="p-4">
+                    <div className="text-3xl font-bold text-blue-600">10 лет</div>
+                    <div className="text-sm text-foreground/70 mt-1">Юридического опыта</div>
+                  </CardContent>
+                </Card>
               </div>
               <div className="mt-6 pt-6 border-t border-foreground/10">
                 <div className="flex items-center gap-6 flex-wrap">
