@@ -119,12 +119,20 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         except Exception:
             pass
     
-    # Send notification to admin
-    if admin_chat_id and bot_token:
+    # Send notification to admin (only if different from user)
+    if admin_chat_id and bot_token and str(admin_chat_id) != str(chat_id):
         try:
             notify_admin(bot_token, admin_chat_id, chat_id, user_name, user_username, user_text, ai_response)
         except Exception as e:
             print(f"Failed to notify admin: {str(e)}")
+    
+    # If admin chat_id matches user chat_id, send inline notification
+    if admin_chat_id and str(admin_chat_id) == str(chat_id):
+        try:
+            inline_msg = f"\n\n📊 [Запись сохранена: {user_username or 'гость'} | {response_status}]"
+            send_telegram_message(bot_token, chat_id, inline_msg)
+        except Exception:
+            pass
     
     return {
         'statusCode': 200,
