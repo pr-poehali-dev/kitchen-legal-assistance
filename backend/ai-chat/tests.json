@@ -1,0 +1,37 @@
+{
+  "tests": [
+    {
+      "name": "Test AI chat with simple question",
+      "method": "POST",
+      "body": {
+        "messages": [
+          {
+            "role": "user",
+            "content": "Сколько составляет неустойка за просрочку?"
+          }
+        ]
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "reply": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test missing messages",
+      "method": "POST",
+      "body": {},
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test OPTIONS for CORS",
+      "method": "OPTIONS",
+      "expectedStatus": 200
+    }
+  ]
+}

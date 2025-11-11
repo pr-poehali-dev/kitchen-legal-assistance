@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import ChatWidget from '@/components/ChatWidget';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -1824,6 +1825,8 @@ const Index = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      <ChatWidget />
     </div>
   );
 };
