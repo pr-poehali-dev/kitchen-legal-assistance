@@ -784,7 +784,8 @@ const Index = () => {
                   { icon: "Wallet", value: "15 млн ₽", label: "Взыскано для клиентов за 2024 год", delay: "0s" },
                   { icon: "Award", value: "95%", label: "Выигранных дел в суде", delay: "0.1s" },
                   { icon: "CheckCircle2", value: "70%", label: "Дел решаются без суда", delay: "0.2s" },
-                  { icon: "Clock", value: "2-6 мес", label: "Средний срок получения денег", delay: "0.3s" }
+                  { icon: "Users", value: "100+", label: "Довольных клиентов", delay: "0.3s" },
+                  { icon: "Clock", value: "2-6 мес", label: "Средний срок получения денег", delay: "0.4s" }
                 ].map((stat, index) => (
                   <div 
                     key={index} 
