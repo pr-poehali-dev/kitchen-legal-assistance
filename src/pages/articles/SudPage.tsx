@@ -314,10 +314,10 @@ const SudPage = () => {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 w-12 h-12 bg-primary hover:bg-primary/90 text-white rounded-full shadow-xl flex items-center justify-center z-50 transition-all hover:scale-110 animate-fade-in"
+          className="fixed bottom-6 right-6 w-10 h-10 bg-primary/70 hover:bg-primary/90 text-white rounded-full shadow-lg flex items-center justify-center z-50 transition-all hover:scale-110 animate-fade-in backdrop-blur-sm"
           aria-label="Наверх"
         >
-          <Icon name="ArrowUp" size={20} />
+          <Icon name="ArrowUp" size={18} />
         </button>
       )}
     </div>
