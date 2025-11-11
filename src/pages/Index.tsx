@@ -761,8 +761,11 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-fade-in">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                Кухню не доставили? Нашли брак? Производитель затягивает сроки?{' '}
-                <span className="text-primary block mt-2">Вернём деньги + неустойка 3% в день!</span>
+                Проблемы с кухней на заказ?{' '}
+                <span className="text-primary">Вернем деньги и нервы!</span>
+                <div className="text-2xl md:text-3xl font-semibold mt-4 text-foreground/80">
+                  Быстро. Законно. Выгодно.
+                </div>
               </h1>
               <div className="inline-block">
                 <Card className="relative bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 border-0 shadow-2xl animate-scale-in animate-gradient hover:shadow-[0_20px_60px_rgba(249,115,22,0.4)] transition-all duration-500 hover:scale-105 backdrop-blur-sm overflow-hidden">
