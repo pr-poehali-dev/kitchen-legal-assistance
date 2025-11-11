@@ -605,7 +605,7 @@ const Index = () => {
                   </CardContent>
                 </Card>
               </div>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-lg md:text-xl text-foreground/80 leading-relaxed">
                 Юридическая помощь по правам покупателей кухонных гарнитуров. Неустойка до 3% в день, возврат 100% средств.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -620,15 +620,15 @@ const Index = () => {
               <div className="flex items-center gap-8 pt-6">
                 <div>
                   <div className="text-3xl font-bold text-primary">100+</div>
-                  <div className="text-sm text-muted-foreground">Выигранных дел</div>
+                  <div className="text-base text-foreground/70">Выигранных дел</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-primary">15 млн ₽</div>
-                  <div className="text-sm text-muted-foreground">Возвращено клиентам</div>
+                  <div className="text-base text-foreground/70">Возвращено клиентам</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-primary">3%</div>
-                  <div className="text-sm text-muted-foreground">Неустойка в день</div>
+                  <div className="text-base text-foreground/70">Неустойка в день</div>
                 </div>
               </div>
             </div>
@@ -655,10 +655,10 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <Badge className="mb-4">Самые частые проблемы</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               Знакомые ситуации?
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed">
               Мы специализируемся на решении проблем с заказными кухонными гарнитурами
             </p>
           </div>
@@ -686,8 +686,8 @@ const Index = () => {
                   <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
                     <Icon name={problem.icon} className="text-primary" size={28} />
                   </div>
-                  <h3 className="text-xl font-bold">{problem.title}</h3>
-                  <p className="text-muted-foreground">{problem.description}</p>
+                  <h3 className="text-2xl font-bold">{problem.title}</h3>
+                  <p className="text-base text-foreground/75 leading-relaxed">{problem.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -724,7 +724,7 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <Badge className="mb-4">Наши услуги</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               Что мы взыскиваем для вас
             </h2>
           </div>
@@ -766,7 +766,7 @@ const Index = () => {
                     )}
                   </div>
                   <h3 className="text-2xl font-bold">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                  <p className="text-base text-foreground/75 leading-relaxed">{service.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -778,10 +778,10 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <Badge className="mb-4">Калькулятор неустойки</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               Рассчитайте свою компенсацию
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed">
               Узнайте, сколько вы можете взыскать за просрочку изготовления кухни
             </p>
           </div>
@@ -856,10 +856,10 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <Badge className="mb-4">Стоимость услуг</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               Прозрачные условия работы
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed">
               Вы платите только за результат — никаких скрытых платежей
             </p>
           </div>
@@ -976,7 +976,7 @@ const Index = () => {
               <h2 className="text-4xl md:text-5xl font-bold">
                 Эксперты по защите прав потребителей
               </h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p className="text-lg text-foreground/80 leading-relaxed">
                 Специализируемся исключительно на спорах с изготовителями кухонных гарнитуров на заказ. 
                 Это наша узкая ниша — мы знаем все тонкости, типовые уловки продавцов и судебную практику.
               </p>
@@ -1012,7 +1012,7 @@ const Index = () => {
                   <h3 className="text-2xl md:text-3xl font-bold mb-3">
                     Работаем по всей Кемеровской области
                   </h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
+                  <p className="text-lg text-foreground/80 leading-relaxed">
                     Наши юристы находятся в Кемерово и оказывают услуги жителям всех городов области: 
                     Новокузнецк, Прокопьевск, Ленинск-Кузнецкий, Киселёвск, Междуреченск, Белово, Анжеро-Судженск и других населённых пунктов. 
                     <span className="font-semibold text-primary"> Выезжаем на встречи, работаем онлайн или в офисе.</span>
@@ -1034,7 +1034,7 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <Badge className="mb-4">Успешные кейсы</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               Реальные результаты наших клиентов
             </h2>
           </div>
@@ -1069,7 +1069,7 @@ const Index = () => {
                   </div>
                   <div className="text-3xl font-bold text-primary">{caseItem.result}</div>
                   <div className="font-semibold">{caseItem.client}</div>
-                  <p className="text-muted-foreground">{caseItem.description}</p>
+                  <p className="text-base text-foreground/75 leading-relaxed">{caseItem.description}</p>
                   <div className="flex items-center gap-2 text-green-600">
                     <Icon name="CheckCircle" size={20} />
                     <span className="font-semibold">Дело выиграно</span>
@@ -1107,10 +1107,10 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-fade-in-up">
             <Badge className="mb-4">Полезные статьи</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               Знания — ваше оружие
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-lg md:text-xl text-foreground/80 leading-relaxed">
               Читайте наш блог, чтобы защитить свои права
             </p>
           </div>
@@ -1121,7 +1121,7 @@ const Index = () => {
                 <CardContent className="pt-6 space-y-4">
                   <Badge>{article.badge}</Badge>
                   <h3 className="text-2xl font-bold">{article.title}</h3>
-                  <p className="text-muted-foreground">{article.preview}</p>
+                  <p className="text-base text-foreground/75 leading-relaxed">{article.preview}</p>
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button variant="outline" className="w-full">
@@ -1212,10 +1212,10 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in-up">
             <Badge className="bg-white text-primary">Свяжитесь с нами</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold">
+            <h2 className="text-3xl md:text-5xl font-bold">
               Получите бесплатную консультацию прямо сейчас
             </h2>
-            <p className="text-xl text-white/90">
+            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
               Расскажем, как вернуть деньги за вашу кухню и взыскать неустойку. Первая консультация бесплатно!
             </p>
 
