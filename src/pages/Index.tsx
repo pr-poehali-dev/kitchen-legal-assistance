@@ -7,13 +7,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCallbackDialogOpen, setIsCallbackDialogOpen] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [selectedArticle, setSelectedArticle] = useState<number | null>(null);
   const [kitchenPrice, setKitchenPrice] = useState('');
   const [delayDays, setDelayDays] = useState('');
   const [penalty, setPenalty] = useState(0);
@@ -75,6 +76,7 @@ const Index = () => {
       badge: "Договор",
       title: "На что обратить внимание при заказе кухни",
       preview: "5 пунктов договора, которые защитят вас от недобросовестных производителей. Сроки, материалы, условия возврата — всё, что нужно проверить до подписания.",
+      url: "/blog/dogovor",
       fullText: `# 📋 На что обратить внимание при заказе кухни
 
 Заказ кухонного гарнитура — серьёзное вложение. Чтобы избежать проблем, важно внимательно изучить договор перед подписанием. Вот 5 ключевых пунктов:
@@ -146,6 +148,7 @@ const Index = () => {
       badge: "Права потребителя",
       title: "Как рассчитать неустойку за просрочку",
       preview: "Пошаговая инструкция с примерами расчёта. Узнайте, сколько вам должны выплатить за каждый день просрочки изготовления вашей кухни.",
+      url: "/blog/neustoika",
       fullText: `# 💰 Как рассчитать неустойку за просрочку
 
 Просрочка изготовления кухни — одно из самых частых нарушений. По закону вам положена неустойка 3% от стоимости за каждый день задержки. Разберём, как правильно рассчитать сумму.
@@ -228,6 +231,7 @@ const Index = () => {
       badge: "Инструкция",
       title: "Обнаружили брак? Действуйте правильно",
       preview: "Что делать сразу после обнаружения дефектов: фото, акт, претензия. Правильные действия в первые дни помогут взыскать максимум.",
+      url: "/blog/brak",
       fullText: `# 🛠️ Обнаружили брак? Действуйте правильно
 
 Обнаружили царапины, сколы или несоответствие размеров в готовой кухне? Первые 48 часов — критически важны для защиты ваших прав. Действуйте по этой инструкции.
@@ -350,6 +354,7 @@ const Index = () => {
       badge: "Судебная практика",
       title: "Топ-5 решений суда в пользу покупателей",
       preview: "Разбираем реальные судебные решения по спорам о кухнях. Как суды определяют размер компенсации и на чьей стороне закон.",
+      url: "/blog/sud",
       fullText: `# 🏆 Топ-5 решений суда в пользу покупателей
 
 Разбираем реальные судебные кейсы по спорам с производителями кухонь. Эти решения показывают, что закон действительно на стороне потребителя.
@@ -1117,47 +1122,15 @@ const Index = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             {articles.map((article, index) => (
-              <Card key={index} className="hover:shadow-xl transition-all duration-300 cursor-pointer animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card key={index} className="hover:shadow-xl transition-all duration-300 cursor-pointer animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }} onClick={() => navigate(article.url)}>
                 <CardContent className="pt-6 space-y-4">
                   <Badge>{article.badge}</Badge>
                   <h3 className="text-2xl font-bold">{article.title}</h3>
                   <p className="text-base text-foreground/75 leading-relaxed">{article.preview}</p>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="outline" className="w-full">
-                        Читать статью
-                        <Icon name="ArrowRight" className="ml-2" size={16} />
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                      <DialogHeader>
-                        <Badge className="w-fit mb-2">{article.badge}</Badge>
-                        <DialogTitle className="text-2xl">{article.title}</DialogTitle>
-                      </DialogHeader>
-                      <div className="prose prose-sm max-w-none mt-4">
-                        {article.fullText.split('\n').map((line, i) => {
-                          if (line.startsWith('# ')) return <h2 key={i} className="text-2xl font-bold mt-6 mb-4">{line.replace('# ', '')}</h2>;
-                          if (line.startsWith('## ')) return <h3 key={i} className="text-xl font-bold mt-5 mb-3">{line.replace('## ', '')}</h3>;
-                          if (line.startsWith('### ')) return <h4 key={i} className="text-lg font-bold mt-4 mb-2">{line.replace('### ', '')}</h4>;
-                          if (line.startsWith('**') && line.endsWith('**')) return <p key={i} className="font-bold mt-3 mb-2">{line.replace(/\*\*/g, '')}</p>;
-                          if (line.startsWith('- ✅')) return <li key={i} className="ml-4 mb-1 list-none text-green-700">{line.replace('- ✅', '✅')}</li>;
-                          if (line.startsWith('- ❌')) return <li key={i} className="ml-4 mb-1 list-none text-red-700">{line.replace('- ❌', '❌')}</li>;
-                          if (line.startsWith('- ')) return <li key={i} className="ml-6 mb-1 list-disc">{line.replace('- ', '')}</li>;
-                          if (line.startsWith('---')) return <hr key={i} className="my-6 border-t-2" />;
-                          if (line.trim() === '') return <br key={i} />;
-                          
-                          const processedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                          return <p key={i} className="mb-3 leading-relaxed" dangerouslySetInnerHTML={{ __html: processedLine }} />;
-                        })}
-                      </div>
-                      <div className="mt-6 pt-6 border-t">
-                        <Button onClick={handleWhatsAppClick} className="w-full bg-green-600 hover:bg-green-700">
-                          <Icon name="MessageCircle" className="mr-2" size={20} />
-                          Получить консультацию в WhatsApp
-                        </Button>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
+                  <Button variant="outline" className="w-full">
+                    Читать статью
+                    <Icon name="ArrowRight" className="ml-2" size={16} />
+                  </Button>
                 </CardContent>
               </Card>
             ))}
