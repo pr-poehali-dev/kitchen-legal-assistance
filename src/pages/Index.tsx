@@ -21,6 +21,8 @@ const Index = () => {
   const [delayDays, setDelayDays] = useState('');
   const [penalty, setPenalty] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,13 +48,38 @@ const Index = () => {
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
 
-  const handleCallbackSubmit = () => {
-    const phoneNumber = '79059940069';
-    const message = encodeURIComponent(`Новая заявка на обратный звонок:\n\nИмя: ${name}\nТелефон: ${phone}`);
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-    setIsCallbackDialogOpen(false);
-    setName('');
-    setPhone('');
+  const handleCallbackSubmit = async () => {
+    setIsSubmitting(true);
+    setSubmitSuccess(false);
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/ab2c3782-b0e3-4574-a807-8d7a2200df0b', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitSuccess(true);
+        setTimeout(() => {
+          setIsCallbackDialogOpen(false);
+          setName('');
+          setPhone('');
+          setSubmitSuccess(false);
+        }, 2000);
+      } else {
+        alert('Произошла ошибка. Попробуйте позвонить нам напрямую.');
+      }
+    } catch (error) {
+      alert('Произошла ошибка. Попробуйте позвонить нам напрямую.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const calculatePenalty = (price: string, days: string) => {
@@ -1424,36 +1451,50 @@ const Index = () => {
                       <DialogHeader>
                         <DialogTitle>Заказать обратный звонок</DialogTitle>
                         <DialogDescription>
-                          Оставьте свои контакты, и мы свяжемся с вами в WhatsApp
+                          Оставьте свои контакты, и мы перезвоним вам в течение 15 минут
                         </DialogDescription>
                       </DialogHeader>
-                      <div className="space-y-4 py-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="name">Ваше имя</Label>
-                          <Input
-                            id="name"
-                            placeholder="Иван"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                          />
+                      {submitSuccess ? (
+                        <div className="py-8 text-center space-y-4">
+                          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                            <Icon name="CheckCircle" className="text-green-600" size={32} />
+                          </div>
+                          <div className="text-lg font-semibold text-green-700">Заявка отправлена!</div>
+                          <p className="text-muted-foreground">Мы свяжемся с вами в ближайшее время</p>
                         </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Номер телефона</Label>
-                          <Input
-                            id="phone"
-                            placeholder="+7 (999) 123-45-67"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <Button 
-                        onClick={handleCallbackSubmit}
-                        disabled={!name || !phone}
-                        className="w-full bg-primary hover:bg-primary/90"
-                      >
-                        Отправить заявку
-                      </Button>
+                      ) : (
+                        <>
+                          <div className="space-y-4 py-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="name">Ваше имя</Label>
+                              <Input
+                                id="name"
+                                placeholder="Иван"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                disabled={isSubmitting}
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="phone">Номер телефона</Label>
+                              <Input
+                                id="phone"
+                                placeholder="+7 (999) 123-45-67"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                disabled={isSubmitting}
+                              />
+                            </div>
+                          </div>
+                          <Button 
+                            onClick={handleCallbackSubmit}
+                            disabled={!name || !phone || isSubmitting}
+                            className="w-full bg-primary hover:bg-primary/90"
+                          >
+                            {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                          </Button>
+                        </>
+                      )}
                     </DialogContent>
                   </Dialog>
                 </CardContent>

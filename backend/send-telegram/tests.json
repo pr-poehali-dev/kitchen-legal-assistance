@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "Test sending callback request",
+      "method": "POST",
+      "body": {
+        "name": "Иван Иванов",
+        "phone": "+7 (999) 123-45-67"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test missing name",
+      "method": "POST",
+      "body": {
+        "phone": "+7 (999) 123-45-67"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Test OPTIONS for CORS",
+      "method": "OPTIONS",
+      "expectedStatus": 200
+    }
+  ]
+}
