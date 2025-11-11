@@ -701,48 +701,50 @@ const Index = () => {
         </script>
       </Helmet>
       <nav 
-        className={`fixed top-0 w-full backdrop-blur-md z-50 shadow-md border-b-2 border-primary/20 transition-all duration-300 ${
+        className={`fixed top-0 w-full backdrop-blur-md z-50 shadow-lg transition-all duration-300 ${
           navVisible ? 'translate-y-0' : '-translate-y-full'
         }`}
-        style={{ backgroundColor: `rgba(255, 255, 255, ${navOpacity / 100})` }}
+        style={{ 
+          background: `linear-gradient(135deg, rgba(14, 116, 144, ${navOpacity / 100}) 0%, rgba(37, 99, 235, ${navOpacity / 100}) 100%)`,
+        }}
       >
         <div className="container mx-auto px-4 py-5">
           <div className="flex items-center justify-between">
             <button onClick={scrollToTop} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-blue-700 rounded-lg flex items-center justify-center shadow-md">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center shadow-md border border-white/30">
                 <Icon name="Scale" className="text-white" size={24} />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-700 bg-clip-text text-transparent">ЮК "Закон Кухни"</span>
+              <span className="text-2xl font-bold text-white drop-shadow-md">ЮК "Закон Кухни"</span>
             </button>
             
             <div className="hidden md:flex items-center gap-8">
-              <button onClick={() => scrollToSection('how-we-work')} className="text-foreground hover:text-primary transition-colors">Как работаем</button>
-              <button onClick={() => scrollToSection('services')} className="text-foreground hover:text-primary transition-colors">Услуги</button>
-              <button onClick={() => scrollToSection('pricing')} className="text-foreground hover:text-primary transition-colors">Цены</button>
-              <button onClick={() => scrollToSection('about')} className="text-foreground hover:text-primary transition-colors">О нас</button>
-              <button onClick={() => scrollToSection('cases')} className="text-foreground hover:text-primary transition-colors">Кейсы</button>
-              <button onClick={() => scrollToSection('blog')} className="text-foreground hover:text-primary transition-colors">Блог</button>
-              <button onClick={() => scrollToSection('contacts')} className="text-foreground hover:text-primary transition-colors">Контакты</button>
-              <Button onClick={() => scrollToSection('contacts')} className="bg-gradient-to-r from-primary to-blue-700">
+              <button onClick={() => scrollToSection('how-we-work')} className="text-white/90 hover:text-white transition-colors font-medium">Как работаем</button>
+              <button onClick={() => scrollToSection('services')} className="text-white/90 hover:text-white transition-colors font-medium">Услуги</button>
+              <button onClick={() => scrollToSection('pricing')} className="text-white/90 hover:text-white transition-colors font-medium">Цены</button>
+              <button onClick={() => scrollToSection('about')} className="text-white/90 hover:text-white transition-colors font-medium">О нас</button>
+              <button onClick={() => scrollToSection('cases')} className="text-white/90 hover:text-white transition-colors font-medium">Кейсы</button>
+              <button onClick={() => scrollToSection('blog')} className="text-white/90 hover:text-white transition-colors font-medium">Блог</button>
+              <button onClick={() => scrollToSection('contacts')} className="text-white/90 hover:text-white transition-colors font-medium">Контакты</button>
+              <Button onClick={() => scrollToSection('contacts')} className="bg-white text-primary hover:bg-white/90 font-bold shadow-lg">
                 Бесплатная консультация
               </Button>
             </div>
 
-            <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <Icon name={isMenuOpen ? "X" : "Menu"} size={28} />
             </button>
           </div>
 
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 space-y-3 animate-fade-in-up">
-              <button onClick={() => scrollToSection('how-we-work')} className="block w-full text-left py-2 hover:text-primary">Как работаем</button>
-              <button onClick={() => scrollToSection('services')} className="block w-full text-left py-2 hover:text-primary">Услуги</button>
-              <button onClick={() => scrollToSection('pricing')} className="block w-full text-left py-2 hover:text-primary">Цены</button>
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 hover:text-primary">О нас</button>
-              <button onClick={() => scrollToSection('cases')} className="block w-full text-left py-2 hover:text-primary">Кейсы</button>
-              <button onClick={() => scrollToSection('blog')} className="block w-full text-left py-2 hover:text-primary">Блог</button>
-              <button onClick={() => scrollToSection('contacts')} className="block w-full text-left py-2 hover:text-primary">Контакты</button>
-              <Button onClick={() => scrollToSection('contacts')} className="w-full bg-gradient-to-r from-primary to-blue-700 mt-2">
+              <button onClick={() => scrollToSection('how-we-work')} className="block w-full text-left py-2 text-white/90 hover:text-white">Как работаем</button>
+              <button onClick={() => scrollToSection('services')} className="block w-full text-left py-2 text-white/90 hover:text-white">Услуги</button>
+              <button onClick={() => scrollToSection('pricing')} className="block w-full text-left py-2 text-white/90 hover:text-white">Цены</button>
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 text-white/90 hover:text-white">О нас</button>
+              <button onClick={() => scrollToSection('cases')} className="block w-full text-left py-2 text-white/90 hover:text-white">Кейсы</button>
+              <button onClick={() => scrollToSection('blog')} className="block w-full text-left py-2 text-white/90 hover:text-white">Блог</button>
+              <button onClick={() => scrollToSection('contacts')} className="block w-full text-left py-2 text-white/90 hover:text-white">Контакты</button>
+              <Button onClick={() => scrollToSection('contacts')} className="w-full bg-white text-primary hover:bg-white/90 font-bold mt-2">
                 Бесплатная консультация
               </Button>
             </div>
