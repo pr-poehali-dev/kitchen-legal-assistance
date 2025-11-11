@@ -81,10 +81,19 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'ai_reply': ai_reply
             }
             
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode('utf-8')
+            result['connection_test'] = {
+                'success': False,
+                'error': str(e),
+                'error_details': error_body,
+                'status_code': e.code
+            }
         except Exception as e:
             result['connection_test'] = {
                 'success': False,
-                'error': str(e)
+                'error': str(e),
+                'error_type': type(e).__name__
             }
     else:
         result['connection_test'] = {
