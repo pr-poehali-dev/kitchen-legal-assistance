@@ -1021,31 +1021,42 @@ const Index = () => {
                 color: "from-orange-500 to-orange-600"
               }
             ].map((step, index) => (
-              <div key={index} className="relative animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div key={index} className="relative animate-fade-in group" style={{ animationDelay: `${index * 0.1}s` }}>
                 {index < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-transparent -translate-y-1/2 z-0" />
+                  <div className="hidden lg:block absolute top-1/2 left-full w-full h-1 bg-gradient-to-r from-primary via-primary/50 to-transparent -translate-y-1/2 z-0">
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                  </div>
                 )}
-                <Card className="relative h-full hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-primary z-10 bg-white">
-                  <CardContent className="pt-8 pb-6 space-y-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-2xl flex items-center justify-center mx-auto shadow-lg`}>
-                      <Icon name={step.icon} className="text-white" size={32} />
-                    </div>
-                    
-                    <div className="text-center">
-                      <div className="inline-block px-3 py-1 bg-primary/10 rounded-full mb-3">
-                        <span className="text-sm font-bold text-primary">Этап {step.step}</span>
+                <Card className="relative h-full hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border-2 hover:border-primary z-10 bg-gradient-to-br from-white via-white to-gray-50 overflow-hidden group">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                  <CardContent className="pt-8 pb-6 px-6 space-y-4 relative z-10">
+                    <div className="relative">
+                      <div className="absolute -top-4 -right-4 text-8xl font-black text-gray-100 opacity-50 select-none">
+                        {step.step}
                       </div>
-                      <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                      <div className={`relative w-20 h-20 bg-gradient-to-br ${step.color} rounded-3xl flex items-center justify-center mx-auto shadow-2xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+                        <Icon name={step.icon} className="text-white" size={36} />
+                      </div>
                     </div>
                     
-                    <p className="text-sm text-foreground/70 leading-relaxed text-center min-h-[80px]">
+                    <div className="text-center space-y-3">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-gradient-to-r from-primary/10 to-blue-500/10 rounded-full border border-primary/20">
+                        <div className={`w-2 h-2 bg-gradient-to-br ${step.color} rounded-full animate-pulse`}></div>
+                        <span className="text-xs font-bold text-primary uppercase tracking-wider">Этап {step.step}</span>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors">{step.title}</h3>
+                    </div>
+                    
+                    <p className="text-sm text-foreground/75 leading-relaxed text-center min-h-[100px]">
                       {step.description}
                     </p>
                     
-                    <div className="pt-4 border-t border-primary/10">
-                      <div className="flex items-center justify-center gap-2 text-primary">
-                        <Icon name="Clock" size={16} />
-                        <span className="text-sm font-semibold">{step.duration}</span>
+                    <div className="pt-4 border-t-2 border-dashed border-gray-200">
+                      <div className="flex items-center justify-center gap-2">
+                        <div className={`w-8 h-8 bg-gradient-to-br ${step.color} rounded-lg flex items-center justify-center`}>
+                          <Icon name="Clock" className="text-white" size={16} />
+                        </div>
+                        <span className="text-sm font-bold text-gray-700">{step.duration}</span>
                       </div>
                     </div>
                   </CardContent>
