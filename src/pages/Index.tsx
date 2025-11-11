@@ -25,14 +25,31 @@ const Index = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [message, setMessage] = useState('');
+  const [showStickyButton, setShowStickyButton] = useState(false);
+  const [showExitIntent, setShowExitIntent] = useState(false);
+  const [exitIntentShown, setExitIntentShown] = useState(false);
+  const [showInlineForm, setShowInlineForm] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
+      const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      setShowStickyButton(scrollPercentage > 30);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0 && !exitIntentShown && !isCallbackDialogOpen) {
+        setShowExitIntent(true);
+        setExitIntentShown(true);
+      }
+    };
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => document.removeEventListener('mouseleave', handleMouseLeave);
+  }, [exitIntentShown, isCallbackDialogOpen]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -71,6 +88,8 @@ const Index = () => {
         setSubmitSuccess(true);
         setTimeout(() => {
           setIsCallbackDialogOpen(false);
+          setShowExitIntent(false);
+          setShowInlineForm(false);
           setName('');
           setPhone('');
           setMessage('');
@@ -1041,20 +1060,79 @@ const Index = () => {
                 </div>
 
                 {penalty > 0 && (
-                  <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl p-8 text-center animate-scale-in">
-                    <div className="text-sm text-muted-foreground mb-2 uppercase tracking-wider">
-                      Вы можете взыскать
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl p-8 text-center animate-scale-in">
+                      <div className="text-sm text-muted-foreground mb-2 uppercase tracking-wider">
+                        Вы можете взыскать
+                      </div>
+                      <div className="text-5xl md:text-6xl font-bold text-green-600 mb-4">
+                        {penalty.toLocaleString('ru-RU')} ₽
+                      </div>
+                      <div className="text-sm text-muted-foreground mb-6">
+                        Только неустойка. Дополнительно: моральный вред, штраф 50%, судебные расходы
+                      </div>
+                      <Button 
+                        onClick={() => setShowInlineForm(!showInlineForm)} 
+                        size="lg" 
+                        className="bg-green-600 hover:bg-green-700 text-white shadow-xl"
+                      >
+                        <Icon name="Sparkles" className="mr-2" size={20} />
+                        Получить эту сумму
+                      </Button>
                     </div>
-                    <div className="text-5xl md:text-6xl font-bold text-green-600 mb-4">
-                      {penalty.toLocaleString('ru-RU')} ₽
-                    </div>
-                    <div className="text-sm text-muted-foreground mb-6">
-                      Только неустойка. Дополнительно: моральный вред, штраф 50%, судебные расходы
-                    </div>
-                    <Button onClick={handleWhatsAppClick} size="lg" className="bg-green-600 hover:bg-green-700 text-white">
-                      <Icon name="MessageCircle" className="mr-2" size={20} />
-                      Получить консультацию
-                    </Button>
+
+                    {showInlineForm && (
+                      <Card className="border-2 border-primary animate-fade-in">
+                        <CardContent className="p-6 space-y-4">
+                          {submitSuccess ? (
+                            <div className="py-6 text-center space-y-4">
+                              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                                <Icon name="CheckCircle" className="text-green-600" size={32} />
+                              </div>
+                              <div className="text-lg font-semibold text-green-700">Заявка отправлена!</div>
+                              <p className="text-muted-foreground">Мы свяжемся с вами в ближайшее время</p>
+                            </div>
+                          ) : (
+                            <>
+                              <div className="text-center mb-4">
+                                <h3 className="text-xl font-bold mb-2">Оставьте заявку на консультацию</h3>
+                                <p className="text-muted-foreground text-sm">Наш юрист свяжется с вами в течение 15 минут</p>
+                              </div>
+                              <div className="space-y-3">
+                                <Input
+                                  placeholder="Ваше имя"
+                                  value={name}
+                                  onChange={(e) => setName(e.target.value)}
+                                  disabled={isSubmitting}
+                                />
+                                <Input
+                                  placeholder="Телефон"
+                                  value={phone}
+                                  onChange={(e) => setPhone(e.target.value)}
+                                  disabled={isSubmitting}
+                                />
+                                <Textarea
+                                  placeholder="Кратко опишите ситуацию (необязательно)"
+                                  value={message}
+                                  onChange={(e) => setMessage(e.target.value)}
+                                  disabled={isSubmitting}
+                                  rows={3}
+                                  className="resize-none"
+                                />
+                                <Button 
+                                  onClick={handleCallbackSubmit}
+                                  disabled={!name || !phone || isSubmitting}
+                                  className="w-full bg-primary hover:bg-primary/90"
+                                  size="lg"
+                                >
+                                  {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
+                                </Button>
+                              </div>
+                            </>
+                          )}
+                        </CardContent>
+                      </Card>
+                    )}
                   </div>
                 )}
 
@@ -1579,6 +1657,99 @@ const Index = () => {
           <Icon name="ArrowUp" size={18} />
         </button>
       )}
+
+      {showStickyButton && (
+        <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-primary to-blue-700 text-white py-4 px-4 shadow-2xl z-40 animate-fade-in">
+          <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0 animate-pulse">
+                <Icon name="Phone" className="text-white" size={24} />
+              </div>
+              <div className="text-center sm:text-left">
+                <div className="font-bold text-lg">Бесплатная консультация за 15 минут</div>
+                <div className="text-white/90 text-sm">Рассчитаем вашу неустойку прямо сейчас</div>
+              </div>
+            </div>
+            <Button 
+              onClick={() => setIsCallbackDialogOpen(true)}
+              size="lg" 
+              className="bg-secondary text-secondary-foreground hover:bg-yellow-400 font-bold shadow-xl whitespace-nowrap"
+            >
+              <Icon name="Sparkles" className="mr-2" size={20} />
+              Получить консультацию
+            </Button>
+          </div>
+        </div>
+      )}
+
+      <Dialog open={showExitIntent} onOpenChange={setShowExitIntent}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">⚠️ Подождите!</DialogTitle>
+            <DialogDescription className="text-base">
+              Не упустите возможность вернуть свои деньги. Получите бесплатный расчёт неустойки и консультацию юриста прямо сейчас!
+            </DialogDescription>
+          </DialogHeader>
+          {submitSuccess ? (
+            <div className="py-6 text-center space-y-4">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                <Icon name="CheckCircle" className="text-green-600" size={32} />
+              </div>
+              <div className="text-lg font-semibold text-green-700">Заявка отправлена!</div>
+              <p className="text-muted-foreground">Мы свяжемся с вами в ближайшее время</p>
+            </div>
+          ) : (
+            <>
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-6 mb-4">
+                <div className="flex items-center gap-4 mb-3">
+                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Icon name="CheckCircle" className="text-white" size={24} />
+                  </div>
+                  <div>
+                    <div className="font-bold text-green-900">95% выигранных дел</div>
+                    <div className="text-sm text-green-700">15 млн ₽ взыскано для клиентов</div>
+                  </div>
+                </div>
+                <div className="text-sm text-green-800">
+                  ✅ Бесплатная консультация<br/>
+                  ✅ Оплата только после результата<br/>
+                  ✅ Работаем без предоплаты
+                </div>
+              </div>
+              <div className="space-y-3">
+                <Input
+                  placeholder="Ваше имя"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  disabled={isSubmitting}
+                />
+                <Input
+                  placeholder="Телефон"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  disabled={isSubmitting}
+                />
+                <Textarea
+                  placeholder="Кратко опишите вашу ситуацию (необязательно)"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  disabled={isSubmitting}
+                  rows={3}
+                  className="resize-none"
+                />
+                <Button 
+                  onClick={handleCallbackSubmit}
+                  disabled={!name || !phone || isSubmitting}
+                  className="w-full bg-primary hover:bg-primary/90"
+                  size="lg"
+                >
+                  {isSubmitting ? 'Отправка...' : 'Получить консультацию'}
+                </Button>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
