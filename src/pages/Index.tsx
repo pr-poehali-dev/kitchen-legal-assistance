@@ -748,28 +748,28 @@ const Index = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-gradient-to-br from-primary to-blue-700 rounded-2xl p-8 md:p-10 text-white">
-              <h3 className="text-3xl font-bold mb-6">
+              <h3 className="text-3xl font-bold mb-8">
                 Как мы решаем ваши проблемы
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-6 mb-8">
                 {[
-                  { step: "1", title: "Бесплатная консультация", description: "Анализируем ваш договор и ситуацию за 15 минут" },
-                  { step: "2", title: "Досудебная претензия", description: "Составляем требование с расчётом неустойки и отправляем продавцу" },
-                  { step: "3", title: "Получение результата", description: "В 70% случаев получаем деньги без суда. Иначе — идём в суд и выигрываем" }
+                  { step: "1", title: "Бесплатная консультация", description: "Анализируем ваш договор и ситуацию за 15 минут. Рассчитываем точную сумму неустойки и оцениваем шансы на успех." },
+                  { step: "2", title: "Досудебная претензия", description: "Составляем юридически грамотное требование с расчётами и отправляем продавцу заказным письмом с уведомлением." },
+                  { step: "3", title: "Переговоры и результат", description: "В 70% случаев получаем деньги без суда за 10-30 дней. Если не удаётся — идём в суд и выигрываем с штрафом 50%." }
                 ].map((step, index) => (
-                  <div key={index} className="flex gap-4 items-start">
-                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-lg">
+                  <div key={index} className="flex gap-4 items-start bg-white/10 rounded-xl p-4 hover:bg-white/15 transition-all">
+                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 font-bold text-xl">
                       {step.step}
                     </div>
                     <div>
-                      <div className="font-bold text-lg mb-1">{step.title}</div>
+                      <div className="font-bold text-lg mb-2">{step.title}</div>
                       <div className="text-white/85 text-sm leading-relaxed">{step.description}</div>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-8 pt-6 border-t border-white/20">
-                <Button onClick={() => scrollToSection('contacts')} size="lg" className="w-full bg-white text-primary hover:bg-white/90 font-bold">
+              <div className="pt-6 border-t border-white/20">
+                <Button onClick={() => scrollToSection('contacts')} size="lg" className="w-full bg-white text-primary hover:bg-white/90 font-bold shadow-lg">
                   <Icon name="MessageCircle" className="mr-2" size={20} />
                   Получить консультацию
                 </Button>
@@ -777,14 +777,9 @@ const Index = () => {
             </div>
 
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 md:p-10 border-2 border-green-200 animate-fade-in">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
-                  <Icon name="TrendingUp" className="text-white" size={24} />
-                </div>
-                <h3 className="text-2xl font-bold text-green-900">Наши результаты</h3>
-              </div>
+              <h3 className="text-3xl font-bold text-green-900 mb-8">Наши результаты</h3>
               
-              <div className="space-y-5">
+              <div className="space-y-4">
                 {[
                   { icon: "Wallet", value: "15 млн ₽", label: "Взыскано для клиентов за 2024 год", delay: "0s" },
                   { icon: "Award", value: "95%", label: "Выигранных дел в суде", delay: "0.1s" },
