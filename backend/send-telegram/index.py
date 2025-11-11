@@ -42,6 +42,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     body_data = json.loads(event.get('body', '{}'))
     name: str = body_data.get('name', '')
     phone: str = body_data.get('phone', '')
+    user_message: str = body_data.get('message', '')
     
     if not name or not phone:
         return {
@@ -71,6 +72,9 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     # Format message
     message = f"🔔 Новая заявка на обратный звонок!\n\n👤 Имя: {name}\n📞 Телефон: {phone}"
+    
+    if user_message:
+        message += f"\n\n📝 Сообщение:\n{user_message}"
     
     # Send to Telegram
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"

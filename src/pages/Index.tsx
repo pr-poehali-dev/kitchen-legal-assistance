@@ -7,6 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
@@ -23,6 +24,7 @@ const Index = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +63,7 @@ const Index = () => {
         body: JSON.stringify({
           name,
           phone,
+          message,
         }),
       });
 
@@ -70,6 +73,7 @@ const Index = () => {
           setIsCallbackDialogOpen(false);
           setName('');
           setPhone('');
+          setMessage('');
           setSubmitSuccess(false);
         }, 2000);
       } else {
@@ -1483,6 +1487,18 @@ const Index = () => {
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 disabled={isSubmitting}
+                              />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="message">Опишите вашу ситуацию (необязательно)</Label>
+                              <Textarea
+                                id="message"
+                                placeholder="Например: Кухня не готова уже 3 месяца, в договоре срок 60 дней..."
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                disabled={isSubmitting}
+                                rows={4}
+                                className="resize-none"
                               />
                             </div>
                           </div>
