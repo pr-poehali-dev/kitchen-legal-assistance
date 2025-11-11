@@ -734,7 +734,7 @@ const Index = () => {
                 <span className="text-primary">Вернем деньги</span> и нервы!
               </h1>
               <div className="inline-block">
-                <Card className="relative bg-gradient-to-r from-primary via-blue-600 to-blue-700 border-0 shadow-2xl animate-scale-in animate-gradient hover:shadow-[0_20px_60px_rgba(37,99,235,0.4)] transition-all duration-500 hover:scale-105 backdrop-blur-sm overflow-hidden">
+                <Card className="relative bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 border-0 shadow-2xl animate-scale-in animate-gradient hover:shadow-[0_20px_60px_rgba(249,115,22,0.4)] transition-all duration-500 hover:scale-105 backdrop-blur-sm overflow-hidden">
                   <div className="absolute inset-0 bg-white/5 rounded-lg ring-1 ring-white/20 ring-inset"></div>
                   <CardContent className="relative p-4 px-5">
                     <div className="flex items-center gap-3">
