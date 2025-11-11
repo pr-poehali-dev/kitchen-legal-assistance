@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -20,6 +20,19 @@ const Index = () => {
   const [kitchenPrice, setKitchenPrice] = useState('');
   const [delayDays, setDelayDays] = useState('');
   const [penalty, setPenalty] = useState(0);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -576,10 +589,10 @@ const Index = () => {
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <button onClick={scrollToTop} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <Icon name="Scale" className="text-primary" size={32} />
               <span className="text-2xl font-bold text-primary">ЮК "Закон Кухни"</span>
-            </div>
+            </button>
             
             <div className="hidden md:flex items-center gap-8">
               <button onClick={() => scrollToSection('how-we-work')} className="text-foreground hover:text-primary transition-colors">Как работаем</button>
@@ -1425,6 +1438,16 @@ const Index = () => {
       >
         <Icon name="MessageCircle" size={28} />
       </button>
+
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-24 right-6 w-12 h-12 bg-primary hover:bg-primary/90 text-white rounded-full shadow-xl flex items-center justify-center z-50 transition-all hover:scale-110 animate-fade-in"
+          aria-label="Наверх"
+        >
+          <Icon name="ArrowUp" size={20} />
+        </button>
+      )}
     </div>
   );
 };

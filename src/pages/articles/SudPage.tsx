@@ -3,9 +3,23 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useState, useEffect } from 'react';
 
 const SudPage = () => {
   const navigate = useNavigate();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app/blog/sud';
 
   const handleWhatsAppClick = () => {
@@ -245,7 +259,7 @@ const SudPage = () => {
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <button onClick={() => navigate('/')} className="flex items-center gap-2">
+            <button onClick={scrollToTop} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <Icon name="Scale" className="text-primary" size={32} />
               <span className="text-2xl font-bold text-primary">ЮК "Закон Кухни"</span>
             </button>
@@ -296,6 +310,16 @@ const SudPage = () => {
           </div>
         </div>
       </article>
+
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 w-12 h-12 bg-primary hover:bg-primary/90 text-white rounded-full shadow-xl flex items-center justify-center z-50 transition-all hover:scale-110 animate-fade-in"
+          aria-label="Наверх"
+        >
+          <Icon name="ArrowUp" size={20} />
+        </button>
+      )}
     </div>
   );
 };
