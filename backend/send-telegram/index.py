@@ -12,6 +12,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     Returns: HTTP response with success/error status
     '''
     method: str = event.get('httpMethod', 'POST')
+    print(f"Request received: method={method}, body={event.get('body', '')[:100]}")
     
     # Handle CORS OPTIONS request
     if method == 'OPTIONS':
