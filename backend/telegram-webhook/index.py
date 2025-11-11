@@ -9,7 +9,7 @@ from psycopg2.extras import RealDictCursor
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Telegram bot webhook that answers user questions using YandexGPT
+    Business: Telegram bot webhook that answers user questions using YandexGPT (with logging)
     Args: event with httpMethod, body containing Telegram update
     Returns: HTTP response with 200 OK
     '''
@@ -123,8 +123,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     if admin_chat_id and bot_token:
         try:
             notify_admin(bot_token, admin_chat_id, chat_id, user_name, user_username, user_text, ai_response)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"Failed to notify admin: {str(e)}")
     
     return {
         'statusCode': 200,
@@ -231,6 +231,8 @@ def save_conversation(database_url: str, chat_id: int, user_name: str, user_user
 def notify_admin(bot_token: str, admin_chat_id: str, user_chat_id: int, 
                 user_name: str, user_username: str, user_message: str, bot_response: str) -> None:
     """Send notification to admin about new conversation"""
+    print(f"Attempting to notify admin. admin_chat_id={admin_chat_id}, user_chat_id={user_chat_id}")
+    
     username_str = f"@{user_username}" if user_username else "без username"
     
     notification = f"""🔔 Новое обращение в бота
@@ -244,4 +246,6 @@ def notify_admin(bot_token: str, admin_chat_id: str, user_chat_id: int,
 🤖 Ответ бота:
 {bot_response[:500]}{"..." if len(bot_response) > 500 else ""}"""
     
+    print(f"Sending notification to admin chat {admin_chat_id}")
     send_telegram_message(bot_token, int(admin_chat_id), notification)
+    print("Notification sent successfully")
