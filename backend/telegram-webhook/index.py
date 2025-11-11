@@ -142,13 +142,18 @@ def send_telegram_message(bot_token: str, chat_id: int, text: str) -> None:
     """Send message to Telegram"""
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
     
-    data = urllib.parse.urlencode({
+    payload = {
         'chat_id': chat_id,
-        'text': text,
-        'parse_mode': 'HTML'
-    }).encode('utf-8')
+        'text': text
+    }
     
-    req = urllib.request.Request(url, data=data, method='POST')
+    data = json.dumps(payload).encode('utf-8')
+    
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    
+    req = urllib.request.Request(url, data=data, headers=headers, method='POST')
     
     with urllib.request.urlopen(req, timeout=10) as response:
         response.read()
