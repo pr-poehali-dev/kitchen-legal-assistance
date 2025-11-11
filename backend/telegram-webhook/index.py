@@ -3,6 +3,8 @@ import os
 import urllib.request
 import urllib.parse
 from typing import Dict, Any
+import psycopg2
+from psycopg2.extras import RealDictCursor
 
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -46,10 +48,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
     
-    # Extract message
+    # Extract message and user info
     message = body_data.get('message', {})
     chat_id = message.get('chat', {}).get('id')
     user_text = message.get('text', '')
+    user_from = message.get('from', {})
+    user_name = f"{user_from.get('first_name', '')} {user_from.get('last_name', '')}".strip()
+    user_username = user_from.get('username', '')
     
     if not chat_id or not user_text:
         return {
@@ -63,6 +68,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     bot_token = os.environ.get('TELEGRAM_BOT_TOKEN')
     yandex_api_key = os.environ.get('YANDEX_API_KEY')
     folder_id = os.environ.get('YANDEX_FOLDER_ID')
+    admin_chat_id = os.environ.get('TELEGRAM_CHAT_ID')
+    database_url = os.environ.get('DATABASE_URL')
     
     if not bot_token or not yandex_api_key or not folder_id:
         if bot_token and chat_id:
@@ -79,19 +86,43 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     # Get AI response
+    ai_response = None
+    response_status = 'success'
+    error_detail = None
+    
     try:
         ai_response = get_yandex_gpt_response(user_text, yandex_api_key, folder_id)
         send_telegram_message(bot_token, chat_id, ai_response)
     except urllib.error.HTTPError as e:
+        response_status = 'error_http'
+        error_detail = str(e)
         error_msg = "😔 Извините, сейчас не могу ответить на ваш вопрос.\n\nПопробуйте:\n• Задать вопрос по-другому\n• Написать позже\n• Позвонить нам: 8 (905) 994-00-69"
+        ai_response = error_msg
         try:
             send_telegram_message(bot_token, chat_id, error_msg)
         except Exception:
             pass
     except Exception as e:
+        response_status = 'error_technical'
+        error_detail = str(e)
         error_msg = "⚠️ Произошла техническая ошибка.\n\nМы уже работаем над её устранением.\nА пока можете связаться с нами напрямую: 8 (905) 994-00-69"
+        ai_response = error_msg
         try:
             send_telegram_message(bot_token, chat_id, error_msg)
+        except Exception:
+            pass
+    
+    # Save to database
+    if database_url:
+        try:
+            save_conversation(database_url, chat_id, user_name, user_username, user_text, ai_response, response_status, error_detail)
+        except Exception:
+            pass
+    
+    # Send notification to admin
+    if admin_chat_id and bot_token:
+        try:
+            notify_admin(bot_token, admin_chat_id, chat_id, user_name, user_username, user_text, ai_response)
         except Exception:
             pass
     
@@ -176,3 +207,41 @@ def send_telegram_message(bot_token: str, chat_id: int, text: str) -> None:
     
     with urllib.request.urlopen(req, timeout=10) as response:
         response.read()
+
+
+def save_conversation(database_url: str, chat_id: int, user_name: str, user_username: str, 
+                     user_message: str, bot_response: str, response_status: str, error_message: str) -> None:
+    """Save conversation to database"""
+    conn = psycopg2.connect(database_url)
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO bot_conversations 
+                (chat_id, user_name, user_username, user_message, bot_response, response_status, error_message)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """,
+                (chat_id, user_name, user_username, user_message, bot_response, response_status, error_message)
+            )
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def notify_admin(bot_token: str, admin_chat_id: str, user_chat_id: int, 
+                user_name: str, user_username: str, user_message: str, bot_response: str) -> None:
+    """Send notification to admin about new conversation"""
+    username_str = f"@{user_username}" if user_username else "без username"
+    
+    notification = f"""🔔 Новое обращение в бота
+
+👤 Пользователь: {user_name} ({username_str})
+💬 ID чата: {user_chat_id}
+
+📝 Вопрос:
+{user_message}
+
+🤖 Ответ бота:
+{bot_response[:500]}{"..." if len(bot_response) > 500 else ""}"""
+    
+    send_telegram_message(bot_token, int(admin_chat_id), notification)
