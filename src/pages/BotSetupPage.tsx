@@ -362,27 +362,84 @@ const BotSetupPage = () => {
             </Card>
           )}
 
-          {/* Help Section */}
-          <div className="mt-12 text-center">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 inline-block">
-              <div className="flex items-start gap-3 text-left">
-                <Icon name="Info" size={24} className="text-blue-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-blue-900 mb-2">
-                    Нужна помощь?
-                  </h4>
-                  <p className="text-sm text-blue-800 mb-3">
-                    Секреты <code className="bg-blue-100 px-1.5 py-0.5 rounded">YANDEX_API_KEY</code> и <code className="bg-blue-100 px-1.5 py-0.5 rounded">YANDEX_FOLDER_ID</code> должны быть настроены в проекте.
-                  </p>
-                  <a 
-                    href="https://t.me/+QgiLIa1gFRY4Y2Iy" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-900 font-medium text-sm"
-                  >
-                    <Icon name="MessageCircle" size={18} />
-                    Написать в поддержку
-                  </a>
+          {/* Important Notice */}
+          <div className="mt-12 space-y-6">
+            <Card className="border-amber-200 bg-amber-50">
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-3">
+                  <Icon name="AlertTriangle" size={24} className="text-amber-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold text-amber-900 mb-2 text-lg">
+                      ⚠️ Требуется обновить YANDEX_FOLDER_ID
+                    </h4>
+                    <p className="text-sm text-amber-800 mb-4">
+                      Текущий ID каталога в секретах не совпадает с ID каталога вашего сервисного аккаунта.
+                    </p>
+                    
+                    <div className="bg-white border border-amber-200 rounded-lg p-4 mb-4">
+                      <div className="space-y-3">
+                        <div>
+                          <span className="text-xs font-medium text-amber-700 uppercase tracking-wide">
+                            Правильный Folder ID (скопируйте это значение):
+                          </span>
+                          <div className="mt-1.5 flex items-center gap-2 bg-amber-100 p-3 rounded-md">
+                            <code className="flex-1 font-mono text-sm text-amber-900 font-semibold">
+                              b1gmmu8hvnaqo83kkhpb
+                            </code>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => {
+                                navigator.clipboard.writeText('b1gmmu8hvnaqo83kkhpb');
+                                toast({
+                                  title: 'Скопировано!',
+                                  description: 'ID каталога скопирован в буфер обмена',
+                                });
+                              }}
+                            >
+                              <Icon name="Copy" size={16} />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2 text-sm text-amber-800">
+                      <p className="font-semibold">Как обновить секрет:</p>
+                      <ol className="list-decimal list-inside space-y-1 ml-2">
+                        <li>Найдите секрет YANDEX_FOLDER_ID в настройках проекта</li>
+                        <li>Удалите старое значение</li>
+                        <li>Вставьте новое значение: <code className="bg-amber-100 px-1.5 py-0.5 rounded font-mono">b1gmmu8hvnaqo83kkhpb</code></li>
+                        <li>Сохраните изменения</li>
+                        <li>Вернитесь на эту страницу и проверьте бота заново</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="text-center">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 inline-block">
+                <div className="flex items-start gap-3 text-left">
+                  <Icon name="Info" size={24} className="text-blue-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold text-blue-900 mb-2">
+                      Нужна помощь?
+                    </h4>
+                    <p className="text-sm text-blue-800 mb-3">
+                      После обновления секрета бот сможет подключиться к YandexGPT
+                    </p>
+                    <a 
+                      href="https://t.me/+QgiLIa1gFRY4Y2Iy" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-blue-700 hover:text-blue-900 font-medium text-sm"
+                    >
+                      <Icon name="MessageCircle" size={18} />
+                      Написать в поддержку
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
