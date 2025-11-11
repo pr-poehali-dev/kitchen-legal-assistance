@@ -7,7 +7,7 @@ from typing import Dict, Any, List
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: AI chatbot for legal consultation about kitchen orders
+    Business: AI chatbot for legal consultation about kitchen orders using YandexGPT
     Args: event with httpMethod, body containing messages array
     Returns: HTTP response with AI assistant reply
     '''
@@ -57,17 +57,18 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'isBase64Encoded': False
         }
     
-    # Get OpenAI API key from environment
-    api_key = os.environ.get('OPENAI_API_KEY')
+    # Get YandexGPT credentials from environment
+    folder_id = os.environ.get('YANDEX_FOLDER_ID')
+    api_key = os.environ.get('YANDEX_API_KEY')
     
-    if not api_key:
+    if not folder_id or not api_key:
         return {
             'statusCode': 500,
             'headers': {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            'body': json.dumps({'error': 'OpenAI API key not configured'}),
+            'body': json.dumps({'error': 'YandexGPT credentials not configured'}),
             'isBase64Encoded': False
         }
     
@@ -98,22 +99,32 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
 - НЕ называй точные суммы взыскания без анализа договора
 - Всегда рекомендуй бесплатную консультацию для точного расчёта"""
     
-    # Prepare messages for OpenAI API
-    api_messages = [{'role': 'system', 'content': system_prompt}]
-    api_messages.extend(messages)
+    # Prepare messages for YandexGPT API
+    yandex_messages = [{'role': 'system', 'text': system_prompt}]
     
-    # Call OpenAI API
-    url = 'https://api.openai.com/v1/chat/completions'
+    # Convert messages to YandexGPT format
+    for msg in messages:
+        yandex_messages.append({
+            'role': msg['role'],
+            'text': msg['content']
+        })
+    
+    # Call YandexGPT API
+    url = 'https://llm.api.cloud.yandex.net/foundationModels/v1/completion'
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f'Bearer {api_key}'
+        'Authorization': f'Api-Key {api_key}',
+        'x-folder-id': folder_id
     }
     
     data = {
-        'model': 'gpt-4o-mini',
-        'messages': api_messages,
-        'temperature': 0.7,
-        'max_tokens': 500
+        'modelUri': f'gpt://{folder_id}/yandexgpt-lite',
+        'completionOptions': {
+            'stream': False,
+            'temperature': 0.6,
+            'maxTokens': 500
+        },
+        'messages': yandex_messages
     }
     
     req = urllib.request.Request(
@@ -127,7 +138,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         with urllib.request.urlopen(req) as response:
             response_data = json.loads(response.read().decode('utf-8'))
         
-        assistant_message = response_data['choices'][0]['message']['content']
+        assistant_message = response_data['result']['alternatives'][0]['message']['text']
         
         return {
             'statusCode': 200,
@@ -138,7 +149,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'body': json.dumps({
                 'reply': assistant_message,
                 'success': True
-            }),
+            }, ensure_ascii=False),
             'isBase64Encoded': False
         }
     except Exception as e:
@@ -148,6 +159,6 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            'body': json.dumps({'error': f'Failed to get AI response: {str(e)}'}),
+            'body': json.dumps({'error': f'Failed to get AI response: {str(e)}'}, ensure_ascii=False),
             'isBase64Encoded': False
         }
