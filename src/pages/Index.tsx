@@ -29,6 +29,8 @@ const Index = () => {
   const [showExitIntent, setShowExitIntent] = useState(false);
   const [exitIntentShown, setExitIntentShown] = useState(false);
   const [showInlineForm, setShowInlineForm] = useState(false);
+  const [viewCount, setViewCount] = useState(0);
+  const [onlineCount, setOnlineCount] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +52,48 @@ const Index = () => {
     document.addEventListener('mouseleave', handleMouseLeave);
     return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, [exitIntentShown, isCallbackDialogOpen]);
+
+  useEffect(() => {
+    // Generate realistic view count based on localStorage + random seed
+    const today = new Date().toDateString();
+    const stored = localStorage.getItem('viewCountDate');
+    
+    const baseCount = 847; // Starting base
+    if (stored === today) {
+      const savedCount = parseInt(localStorage.getItem('viewCount') || '0');
+      setViewCount(savedCount);
+    } else {
+      const daysSinceEpoch = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
+      const dailyIncrement = (daysSinceEpoch % 47) + 23; // Random 23-70 per day
+      const newCount = baseCount + dailyIncrement;
+      setViewCount(newCount);
+      localStorage.setItem('viewCount', newCount.toString());
+      localStorage.setItem('viewCountDate', today);
+    }
+
+    // Simulate online users
+    const randomOnline = Math.floor(Math.random() * 8) + 3; // 3-10 online
+    setOnlineCount(randomOnline);
+
+    // Increment view count every 3-7 minutes
+    const interval = setInterval(() => {
+      setViewCount(prev => {
+        const newVal = prev + 1;
+        localStorage.setItem('viewCount', newVal.toString());
+        return newVal;
+      });
+    }, (Math.random() * 240000) + 180000); // 3-7 minutes
+
+    // Change online count randomly
+    const onlineInterval = setInterval(() => {
+      setOnlineCount(Math.floor(Math.random() * 8) + 3);
+    }, 45000); // every 45 seconds
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(onlineInterval);
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -720,7 +764,7 @@ const Index = () => {
                   Узнать больше
                 </Button>
               </div>
-              <div className="flex items-center gap-8 pt-6">
+              <div className="flex items-center gap-8 pt-6 flex-wrap">
                 <div>
                   <div className="text-3xl font-bold text-primary">100+</div>
                   <div className="text-base text-foreground/70">Выигранных дел</div>
@@ -732,6 +776,22 @@ const Index = () => {
                 <div>
                   <div className="text-3xl font-bold text-primary">3%</div>
                   <div className="text-base text-foreground/70">Неустойка в день</div>
+                </div>
+              </div>
+              <div className="mt-6 pt-6 border-t border-foreground/10">
+                <div className="flex items-center gap-6 flex-wrap">
+                  <div className="flex items-center gap-2 text-sm">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-foreground/70">
+                      <span className="font-semibold text-green-600">{onlineCount}</span> человек онлайн
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Icon name="Eye" className="text-foreground/50" size={16} />
+                    <span className="text-foreground/70">
+                      <span className="font-semibold">{viewCount.toLocaleString('ru-RU')}</span> просмотров сегодня
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1488,6 +1548,20 @@ const Index = () => {
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
               Расскажем, как вернуть деньги за вашу кухню и взыскать неустойку. Первая консультация бесплатно!
             </p>
+            <div className="flex items-center justify-center gap-6 flex-wrap pt-2">
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-white/90 text-sm">
+                  <span className="font-bold text-white">{onlineCount}</span> человек онлайн
+                </span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+                <Icon name="Users" className="text-white/70" size={16} />
+                <span className="text-white/90 text-sm">
+                  <span className="font-bold text-white">{viewCount.toLocaleString('ru-RU')}</span> просмотров
+                </span>
+              </div>
+            </div>
 
             <div className="grid md:grid-cols-3 gap-6 mt-12">
               <Card className="bg-white/15 backdrop-blur-sm border-white/30 hover:bg-white/20 transition-all hover:scale-105">
