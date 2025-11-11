@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Test credentials check",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "credentials_status": {}
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
