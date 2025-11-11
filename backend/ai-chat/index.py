@@ -39,11 +39,12 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         }
     
     # Parse request body
-    body_str = event.get('body', '{}')
-    if not body_str or body_str == '':
-        body_str = '{}'
+    body_str = event.get('body') or '{}'
     
-    body_data = json.loads(body_str)
+    try:
+        body_data = json.loads(body_str) if body_str else {}
+    except json.JSONDecodeError:
+        body_data = {}
     messages: List[Dict[str, str]] = body_data.get('messages', [])
     
     if not messages:
@@ -113,8 +114,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     url = 'https://llm.api.cloud.yandex.net/foundationModels/v1/completion'
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f'Api-Key {api_key}',
-        'x-folder-id': folder_id
+        'Authorization': f'Api-Key {api_key}'
     }
     
     data = {
