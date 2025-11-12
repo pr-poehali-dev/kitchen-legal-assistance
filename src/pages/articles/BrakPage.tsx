@@ -23,7 +23,7 @@ const BrakPage = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app/blog/brak';
+  const canonicalUrl = 'https://vernem-kuhni.ru/blog/brak';
 
   const handleWhatsAppClick = () => {
     const phoneNumber = '79059940069';

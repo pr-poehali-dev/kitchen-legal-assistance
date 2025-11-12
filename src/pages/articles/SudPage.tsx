@@ -23,7 +23,7 @@ const SudPage = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app/blog/sud';
+  const canonicalUrl = 'https://vernem-kuhni.ru/blog/sud';
 
   const handleWhatsAppClick = () => {
     const phoneNumber = '79059940069';

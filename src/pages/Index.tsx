@@ -14,7 +14,7 @@ import ChatWidget from '@/components/ChatWidget';
 
 const Index = () => {
   const navigate = useNavigate();
-  const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app';
+  const canonicalUrl = 'https://vernem-kuhni.ru';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCallbackDialogOpen, setIsCallbackDialogOpen] = useState(false);
   const [name, setName] = useState('');

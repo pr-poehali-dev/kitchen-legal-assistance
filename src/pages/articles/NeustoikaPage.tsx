@@ -23,7 +23,7 @@ const NeustoikaPage = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const canonicalUrl = 'https://kitchen-legal-assistance.poehali.app/blog/neustoika';
+  const canonicalUrl = 'https://vernem-kuhni.ru/blog/neustoika';
 
   const handleWhatsAppClick = () => {
     const phoneNumber = '79059940069';
