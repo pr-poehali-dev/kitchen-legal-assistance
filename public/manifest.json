@@ -1,0 +1,20 @@
+{
+  "name": "ЮК Вернём кухню - Защита прав потребителей",
+  "short_name": "Вернём кухню",
+  "description": "Юридическая помощь покупателям кухонь. Взыскание неустойки 3% в день, возврат 100% средств.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "legal"],
+  "lang": "ru-RU"
+}

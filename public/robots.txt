@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://kitchen-legal-assistance.poehali.app/sitemap.xml
+Sitemap: https://vernem-kuhni.ru/sitemap.xml
