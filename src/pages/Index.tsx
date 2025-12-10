@@ -127,7 +127,7 @@ const Index = () => {
 
   const handleMaxClick = () => {
     const phoneNumber = '89236095502';
-    window.open(`https://max.uz/${phoneNumber}`, '_blank');
+    window.open(`https://max.ru/${phoneNumber}`, '_blank');
   };
 
   const handleCallbackSubmit = async () => {
