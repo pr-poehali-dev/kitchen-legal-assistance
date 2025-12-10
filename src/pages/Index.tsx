@@ -126,8 +126,7 @@ const Index = () => {
   };
 
   const handleMaxClick = () => {
-    const phoneNumber = '89236095502';
-    window.open(`https://max.ru/${phoneNumber}`, '_blank');
+    window.open('https://max.ru/u/f9LHodD0cOJohRrMZAV8u3UGXPWXARxliLKJsn3_agehgKmXWgHxLUrQ4yk', '_blank');
   };
 
   const handleCallbackSubmit = async () => {
