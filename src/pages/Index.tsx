@@ -1785,7 +1785,7 @@ const Index = () => {
       </footer>
 
       <button
-        onClick={handleWhatsAppClick}
+        onClick={handleMaxClick}
         className="fixed bottom-6 right-6 w-16 h-16 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-2xl flex items-center justify-center z-50 transition-all hover:scale-110 animate-fade-in"
         aria-label="Написать в WhatsApp"
       >
