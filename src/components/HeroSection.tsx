@@ -2,12 +2,12 @@ import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
 
 interface HeroSectionProps {
-  onWhatsAppClick: () => void;
+  onMaxClick: () => void;
   onCallbackClick: () => void;
   onScrollToSection: (id: string) => void;
 }
 
-const HeroSection = ({ onWhatsAppClick, onCallbackClick, onScrollToSection }: HeroSectionProps) => {
+const HeroSection = ({ onMaxClick, onCallbackClick, onScrollToSection }: HeroSectionProps) => {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center px-4 pt-20 pb-12 relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5">
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -30,11 +30,11 @@ const HeroSection = ({ onWhatsAppClick, onCallbackClick, onScrollToSection }: He
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Button 
             size="lg" 
-            className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            onClick={onWhatsAppClick}
+            className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800"
+            onClick={onMaxClick}
           >
             <Icon name="MessageCircle" className="mr-2" size={24} />
-            Написать в WhatsApp
+            Написать в Max
           </Button>
           <Button 
             size="lg" 

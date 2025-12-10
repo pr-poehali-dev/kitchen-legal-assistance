@@ -25,10 +25,9 @@ const DogovorPage = () => {
   };
   const canonicalUrl = 'https://vernem-kuhni.ru/blog/dogovor';
 
-  const handleWhatsAppClick = () => {
-    const phoneNumber = '79059940069';
-    const message = encodeURIComponent('Здравствуйте! Хочу получить консультацию по защите прав потребителей.');
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+  const handleMaxClick = () => {
+    const phoneNumber = '89236095502';
+    window.open(`https://max.uz/${phoneNumber}`, '_blank');
   };
 
   const article = {
@@ -99,7 +98,7 @@ const DogovorPage = () => {
 2. Зафиксируйте все дефекты (фото, видео)
 3. Обратитесь к юристу по защите прав потребителей
 
-Мы поможем взыскать неустойку, вернуть деньги и компенсировать моральный вред. Звоните: **8 (905) 994-00-69**`
+Мы поможем взыскать неустойку, вернуть деньги и компенсировать моральный вред. Звоните: **8 (923) 609-55-02**`
   };
 
   return (
@@ -188,9 +187,9 @@ const DogovorPage = () => {
             <div className="bg-gradient-to-br from-primary to-blue-700 rounded-2xl p-8 text-white text-center">
               <h3 className="text-2xl font-bold mb-4">Нужна консультация?</h3>
               <p className="text-lg mb-6">Мы поможем защитить ваши права и взыскать компенсацию</p>
-              <Button onClick={handleWhatsAppClick} size="lg" className="bg-green-600 hover:bg-green-700">
+              <Button onClick={handleMaxClick} size="lg" className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
                 <Icon name="MessageCircle" className="mr-2" size={20} />
-                Написать в WhatsApp
+                Написать в Max
               </Button>
             </div>
           </div>

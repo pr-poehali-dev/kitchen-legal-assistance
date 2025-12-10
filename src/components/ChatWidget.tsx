@@ -62,7 +62,7 @@ const ChatWidget = () => {
       const data = await response.json();
 
       if (data.success && data.reply) {
-        const hasPhoneNumber = data.reply.includes('8 (905) 994-00-69') || data.reply.includes('89059940069');
+        const hasPhoneNumber = data.reply.includes('8 (923) 609-55-02') || data.reply.includes('89236095502');
         
         const assistantMessage: Message = {
           role: 'assistant',
@@ -73,14 +73,14 @@ const ChatWidget = () => {
       } else {
         const errorMessage: Message = {
           role: 'assistant',
-          content: 'Извините, произошла ошибка. Позвоните нам по телефону 8 (905) 994-00-69 для консультации.'
+          content: 'Извините, произошла ошибка. Позвоните нам по телефону 8 (923) 609-55-02 для консультации.'
         };
         setMessages(prev => [...prev, errorMessage]);
       }
     } catch (error) {
       const errorMessage: Message = {
         role: 'assistant',
-        content: 'Извините, не удалось получить ответ. Попробуйте позвонить нам: 8 (905) 994-00-69'
+        content: 'Извините, не удалось получить ответ. Попробуйте позвонить нам: 8 (923) 609-55-02'
       };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
